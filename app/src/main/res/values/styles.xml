@@ -1,0 +1,35 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="FullscreenTheme" parent="AppTheme">
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
+    <style name="TranslucentFullscreenTheme" parent="FullscreenTheme">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
+
+    <style name="SplashTheme" parent="FullscreenTheme">
+        <!--<item name="android:windowBackground">@drawable/splash</item>-->
+    </style>
+
+    <style name="DialogFragmentAnimation">
+        <item name="android:windowEnterAnimation">@anim/dialog_fragment_in</item>
+        <item name="android:windowExitAnimation">@anim/dialog_fragment_out</item>
+    </style>
+
+    <!--Dialog 底部进出动画-->
+    <style name="DialogBottomAnimation">
+        <item name="android:windowEnterAnimation">@anim/dialog_bottom_slide_in</item>
+        <item name="android:windowExitAnimation">@anim/dialog_bottom_slide_out</item>
+    </style>
+
+</resources>
