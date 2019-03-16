@@ -19,6 +19,7 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //强制锁定窗口方向
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         if (regEvent() && !EventBus.getDefault().isRegistered(this)) {
             EventBus.getDefault().register(this);

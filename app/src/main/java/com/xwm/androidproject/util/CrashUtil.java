@@ -8,7 +8,6 @@ import android.os.Build;
 import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresPermission;
-import android.util.Log;
 
 import com.xwm.androidproject.MyApplication;
 
@@ -38,6 +37,7 @@ import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
  * </pre>
  */
 public final class CrashUtil {
+    private static final String TAG = "CrashUtil";
 
     private static Context appContext;
 
@@ -74,7 +74,8 @@ public final class CrashUtil {
             public void uncaughtException(final Thread t, final Throwable e) {
                 if (e == null) {
                     if (DEFAULT_UNCAUGHT_EXCEPTION_HANDLER != null) {
-                        DEFAULT_UNCAUGHT_EXCEPTION_HANDLER.uncaughtException(t, null);
+                        DEFAULT_UNCAUGHT_EXCEPTION_HANDLER.uncaughtException(t, e);
+                        //这里可以将异常信息上传至服务器
                     } else {
                         android.os.Process.killProcess(android.os.Process.myPid());
                         System.exit(1);
@@ -109,7 +110,7 @@ public final class CrashUtil {
                 if (createOrExistsFile(fullPath)) {
                     input2File(crashInfo, fullPath);
                 } else {
-                    Log.e("CrashUtil", "create " + fullPath + " failed!");
+                    LogUtil.e(TAG, "create " + fullPath + " failed!");
                 }
 
                 if (sOnCrashListener != null) {
@@ -255,7 +256,7 @@ public final class CrashUtil {
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
-        Log.e("CrashUtil", "write crash info to " + filePath + " failed!");
+        LogUtil.e(TAG, "write crash info to " + filePath + " failed!");
     }
 
     private static boolean createOrExistsFile(final String filePath) {
