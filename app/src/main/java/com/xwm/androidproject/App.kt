@@ -15,6 +15,10 @@ class App : Application() {
         super.onCreate()
         context = applicationContext
 
+        initLeakCanary()
+    }
+
+    private fun initLeakCanary() {
         if (LeakCanary.isInAnalyzerProcess(this)) {
             // This process is dedicated to LeakCanary for heap analysis.
             // You should not init your app in this process.

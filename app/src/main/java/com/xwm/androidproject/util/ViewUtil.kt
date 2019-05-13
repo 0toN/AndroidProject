@@ -9,8 +9,8 @@ import android.view.View
 object ViewUtil {
     private const val TAG = "ViewUtil"
 
-    private val onTouchListener = View.OnTouchListener { view: View, _ ->
-        view.performClick()
+    private val onTouchListener = View.OnTouchListener { _, _ ->
+        //        view.performClick()
         true
     }
 

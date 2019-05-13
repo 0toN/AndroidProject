@@ -2,13 +2,12 @@ package com.xwm.androidproject.base
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.content.pm.ActivityInfo
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.SystemClock
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
-import android.support.v7.app.AppCompatActivity
+import com.trello.rxlifecycle2.components.support.RxAppCompatActivity
 import com.xwm.androidproject.callback.PermissionListener
 import org.greenrobot.eventbus.EventBus
 import java.util.*
@@ -17,16 +16,14 @@ import java.util.*
  * @author Created by Adam on 2018-10-26
  */
 @SuppressLint("Registered")
-open class BaseActivity : AppCompatActivity() {
+open class BaseActivity : RxAppCompatActivity() {
     private lateinit var mListener: PermissionListener
 
-    private lateinit var mStartActivityTag: String
+    private var mStartActivityTag: String? = null
     private var mStartActivityTime: Long = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //强制锁定窗口方向
-        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         if (regEvent() && !EventBus.getDefault().isRegistered(this)) {
             EventBus.getDefault().register(this)
         }

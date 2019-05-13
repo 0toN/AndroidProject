@@ -17,9 +17,8 @@ object ToastUtil {
      */
     fun showShort(msg: String) {
         toast.cancel()
-        val context = App.context
         if (!TextUtils.isEmpty(msg)) {
-            toast = Toast.makeText(context, msg, Toast.LENGTH_SHORT)
+            toast = Toast.makeText(App.context, msg, Toast.LENGTH_SHORT)
             toast.show()
         }
     }
@@ -31,8 +30,7 @@ object ToastUtil {
      */
     fun showShort(resId: Int) {
         toast.cancel()
-        val context = App.context
-        toast = Toast.makeText(context, resId, Toast.LENGTH_SHORT)
+        toast = Toast.makeText(App.context, resId, Toast.LENGTH_SHORT)
         toast.show()
     }
 
@@ -44,7 +42,6 @@ object ToastUtil {
      */
     fun showLong(msg: String) {
         toast.cancel()
-        val context = App.context
         if (!TextUtils.isEmpty(msg)) {
             toast = Toast.makeText(App.context, msg, Toast.LENGTH_LONG)
             toast.show()
@@ -58,7 +55,6 @@ object ToastUtil {
      */
     fun showLong(resId: Int) {
         toast.cancel()
-        val context = App.context
         toast = Toast.makeText(App.context, resId, Toast.LENGTH_LONG)
         toast.show()
     }

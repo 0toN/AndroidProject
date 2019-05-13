@@ -24,7 +24,7 @@ import java.util.concurrent.Executors
  * desc  : utils about crash
 </pre> *
  */
-class CrashUtil private constructor() {
+class CrashUtil {
 
     init {
         throw UnsupportedOperationException("u can't instantiate me...")

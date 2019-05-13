@@ -2,7 +2,6 @@ package com.xwm.androidproject.ui
 
 import android.os.Bundle
 import android.widget.TextView
-
 import com.xwm.androidproject.R
 import com.xwm.androidproject.base.BaseActivity
 
