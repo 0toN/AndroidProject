@@ -6,7 +6,7 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Environment
-import android.support.annotation.RequiresPermission
+import androidx.annotation.RequiresPermission
 import com.xwm.androidproject.App
 import java.io.*
 import java.lang.Thread.UncaughtExceptionHandler

@@ -1,6 +1,5 @@
 package com.xwm.androidproject.net
 
-import android.annotation.Nullable
 import android.text.TextUtils
 import com.xwm.androidproject.App
 import com.xwm.androidproject.util.LogUtil
@@ -96,7 +95,7 @@ class RetrofitFactory private constructor() {
      * @return API实体类
      */
     fun <T> create(clazz: Class<T>): T {
-        checkNotNull(retrofit, "BaseUrl not init,you should init first!")
+        checkNotNull(retrofit)
         return retrofit.create(clazz)
     }
 
@@ -109,13 +108,6 @@ class RetrofitFactory private constructor() {
      */
     fun <T> create(baseUrl: String, clazz: Class<T>): T {
         return builder.baseUrl(baseUrl).build().create(clazz)
-    }
-
-    private fun <T> checkNotNull(@Nullable obj: T, message: String): T {
-        if (obj == null) {
-            throw NullPointerException(message)
-        }
-        return obj
     }
 
     private object Holder {
