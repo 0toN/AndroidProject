@@ -1,4 +1,4 @@
-package com.xwm.androidproject.constants
+package com.xwm.base.constants
 
 /**
  * <pre>

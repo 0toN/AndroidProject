@@ -1,4 +1,4 @@
-package com.xwm.androidproject.util
+package com.xwm.base.util
 
 import android.app.Activity
 import android.content.Context
@@ -26,10 +26,8 @@ object KeyboardUtil {
      * 显示软键盘
      */
     fun showSoftKeyboard(activity: Activity, editText: EditText?) {
-        if (editText != null) {
-            editText.requestFocus()
-            val manager = activity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            manager.showSoftInput(editText, 0)
-        }
+        editText?.requestFocus()
+        val manager = activity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        manager.showSoftInput(editText, 0)
     }
 }

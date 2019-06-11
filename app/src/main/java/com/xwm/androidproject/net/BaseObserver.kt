@@ -1,7 +1,7 @@
 package com.xwm.androidproject.net
 
-import com.xwm.androidproject.util.LogUtil
-import com.xwm.androidproject.util.ToastUtil
+import com.xwm.base.util.LogUtil
+import com.xwm.base.util.ToastUtil
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
 

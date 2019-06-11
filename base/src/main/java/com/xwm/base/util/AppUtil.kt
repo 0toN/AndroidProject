@@ -1,4 +1,4 @@
-package com.xwm.androidproject.util
+package com.xwm.base.util
 
 import android.content.Context
 import android.text.TextUtils

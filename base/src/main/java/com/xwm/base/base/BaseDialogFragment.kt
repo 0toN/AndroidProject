@@ -1,4 +1,4 @@
-package com.xwm.androidproject.base
+package com.xwm.base.base
 
 import android.app.Dialog
 import android.graphics.Color
@@ -10,8 +10,8 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 
-import com.xwm.androidproject.R
-import com.xwm.androidproject.util.LogUtil
+import com.xwm.base.R
+import com.xwm.base.util.LogUtil
 
 import org.greenrobot.eventbus.EventBus
 

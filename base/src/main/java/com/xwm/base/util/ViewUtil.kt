@@ -1,4 +1,4 @@
-package com.xwm.androidproject.util
+package com.xwm.base.util
 
 import android.util.Log
 import android.view.View

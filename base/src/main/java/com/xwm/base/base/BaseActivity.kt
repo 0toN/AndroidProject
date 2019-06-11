@@ -1,4 +1,4 @@
-package com.xwm.androidproject.base
+package com.xwm.base.base
 
 import android.annotation.SuppressLint
 import android.content.Intent

@@ -1,7 +1,6 @@
-package com.xwm.androidproject.util
+package com.xwm.base.util
 
-import com.xwm.androidproject.constants.RegexConstants
-
+import com.xwm.base.constants.RegexConstants
 import java.util.regex.Pattern
 
 /**

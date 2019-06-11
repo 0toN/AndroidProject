@@ -1,16 +1,15 @@
 package com.xwm.androidproject.net
 
 import android.text.TextUtils
-import com.xwm.androidproject.App
-import com.xwm.androidproject.util.LogUtil
-import com.xwm.androidproject.util.NetworkUtil
+import com.xwm.base.util.LogUtil
+import com.xwm.base.util.NetworkUtil
+import com.xwm.base.util.Utils
 import okhttp3.*
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.io.File
-import java.io.IOException
 import java.util.concurrent.TimeUnit
 
 
@@ -22,7 +21,7 @@ class RetrofitFactory private constructor() {
     private var builder: Retrofit.Builder
 
     init {
-        val cache = Cache(File(App.context.externalCacheDir, "ok-cache"), 1024 * 1024 * 30L)
+        val cache = Cache(File(Utils.app.externalCacheDir, "ok-cache"), 1024 * 1024 * 30L)
 
         // 创建OkHttpClient
         val okHttpClient = OkHttpClient.Builder()
@@ -48,7 +47,6 @@ class RetrofitFactory private constructor() {
     }
 
     internal class CacheNetworkInterceptor : Interceptor {
-        @Throws(IOException::class)
         override fun intercept(chain: Interceptor.Chain): Response {
             //无缓存，进行缓存
             val response = chain.proceed(chain.request())
@@ -61,8 +59,6 @@ class RetrofitFactory private constructor() {
     }
 
     internal class CacheIntercepter : Interceptor {
-
-        @Throws(IOException::class)
         override fun intercept(chain: Interceptor.Chain): Response {
             val response: Response
             val request: Request
@@ -95,7 +91,6 @@ class RetrofitFactory private constructor() {
      * @return API实体类
      */
     fun <T> create(clazz: Class<T>): T {
-        checkNotNull(retrofit)
         return retrofit.create(clazz)
     }
 

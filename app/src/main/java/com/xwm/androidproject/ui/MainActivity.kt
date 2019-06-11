@@ -2,7 +2,7 @@ package com.xwm.androidproject.ui
 
 import android.os.Bundle
 import com.xwm.androidproject.R
-import com.xwm.androidproject.base.BaseActivity
+import com.xwm.base.base.BaseActivity
 
 class MainActivity : BaseActivity() {
 

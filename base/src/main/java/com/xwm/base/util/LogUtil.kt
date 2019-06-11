@@ -1,7 +1,7 @@
-package com.xwm.androidproject.util
+package com.xwm.base.util
 
 import android.util.Log
-import com.xwm.androidproject.BuildConfig
+import com.xwm.base.BuildConfig
 
 /**
  * @author Created by Adam on 2018-12-20
@@ -10,51 +10,30 @@ import com.xwm.androidproject.BuildConfig
 object LogUtil {
 
     fun v(content: String) {
-        if (!BuildConfig.DEBUG) {
-            return
-        }
         log(Log.VERBOSE, content)
     }
 
     fun w(content: String) {
-        if (!BuildConfig.DEBUG) {
-            return
-        }
         log(Log.WARN, content)
     }
 
     fun i(content: String) {
-        if (!BuildConfig.DEBUG) {
-            return
-        }
         log(Log.INFO, content)
     }
 
     fun d(content: String) {
-        if (!BuildConfig.DEBUG) {
-            return
-        }
         log(Log.DEBUG, content)
     }
 
-    fun d(tag: String, content: String) {
-        if (!BuildConfig.DEBUG) {
-            return
-        }
-        log(Log.DEBUG, tag, content)
-    }
-
     fun e(content: String) {
-        if (!BuildConfig.DEBUG) {
-            return
-        }
         log(Log.ERROR, content)
     }
 
+    fun d(tag: String, content: String) {
+        log(Log.DEBUG, tag, content)
+    }
+
     fun e(tag: String, content: String) {
-        if (!BuildConfig.DEBUG) {
-            return
-        }
         log(Log.ERROR, tag, content)
     }
 

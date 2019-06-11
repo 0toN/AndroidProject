@@ -1,7 +1,6 @@
-package com.xwm.androidproject.util
+package com.xwm.base.util
 
 import android.preference.PreferenceManager
-import com.xwm.androidproject.App
 
 /**
  * SharedPreferences工具类，提供简单的封装接口，简化SharedPreferences的用法。
@@ -19,7 +18,7 @@ object SharedUtil {
      */
     fun save(key: String, value: Boolean) {
         val editor = PreferenceManager.getDefaultSharedPreferences(
-                App.context).edit()
+                Utils.app).edit()
         editor.putBoolean(key, value)
         editor.apply()
     }
@@ -32,7 +31,7 @@ object SharedUtil {
      */
     fun save(key: String, value: Float) {
         val editor = PreferenceManager.getDefaultSharedPreferences(
-                App.context).edit()
+                Utils.app).edit()
         editor.putFloat(key, value)
         editor.apply()
     }
@@ -45,7 +44,7 @@ object SharedUtil {
      */
     fun save(key: String, value: Int) {
         val editor = PreferenceManager.getDefaultSharedPreferences(
-                App.context).edit()
+                Utils.app).edit()
         editor.putInt(key, value)
         editor.apply()
     }
@@ -58,7 +57,7 @@ object SharedUtil {
      */
     fun save(key: String, value: Long) {
         val editor = PreferenceManager.getDefaultSharedPreferences(
-                App.context).edit()
+                Utils.app).edit()
         editor.putLong(key, value)
         editor.apply()
     }
@@ -71,7 +70,7 @@ object SharedUtil {
      */
     fun save(key: String, value: String) {
         val editor = PreferenceManager.getDefaultSharedPreferences(
-                App.context).edit()
+                Utils.app).edit()
         editor.putString(key, value)
         editor.apply()
     }
@@ -84,7 +83,7 @@ object SharedUtil {
      * @return boolean类型的值，如果读取不到，则返回默认值
      */
     fun read(key: String, defValue: Boolean): Boolean {
-        val prefs = PreferenceManager.getDefaultSharedPreferences(App.context)
+        val prefs = PreferenceManager.getDefaultSharedPreferences(Utils.app)
         return prefs.getBoolean(key, defValue)
     }
 
@@ -96,7 +95,7 @@ object SharedUtil {
      * @return float类型的值，如果读取不到，则返回默认值
      */
     fun read(key: String, defValue: Float): Float {
-        val prefs = PreferenceManager.getDefaultSharedPreferences(App.context)
+        val prefs = PreferenceManager.getDefaultSharedPreferences(Utils.app)
         return prefs.getFloat(key, defValue)
     }
 
@@ -108,7 +107,7 @@ object SharedUtil {
      * @return int类型的值，如果读取不到，则返回默认值
      */
     fun read(key: String, defValue: Int): Int {
-        val prefs = PreferenceManager.getDefaultSharedPreferences(App.context)
+        val prefs = PreferenceManager.getDefaultSharedPreferences(Utils.app)
         return prefs.getInt(key, defValue)
     }
 
@@ -120,7 +119,7 @@ object SharedUtil {
      * @return long类型的值，如果读取不到，则返回默认值
      */
     fun read(key: String, defValue: Long): Long {
-        val prefs = PreferenceManager.getDefaultSharedPreferences(App.context)
+        val prefs = PreferenceManager.getDefaultSharedPreferences(Utils.app)
         return prefs.getLong(key, defValue)
     }
 
@@ -132,7 +131,7 @@ object SharedUtil {
      * @return String类型的值，如果读取不到，则返回默认值
      */
     fun read(key: String, defValue: String): String {
-        val prefs = PreferenceManager.getDefaultSharedPreferences(App.context)
+        val prefs = PreferenceManager.getDefaultSharedPreferences(Utils.app)
         return prefs.getString(key, defValue)
     }
 
@@ -143,7 +142,7 @@ object SharedUtil {
      * @return 键已存在返回true，否则返回false。
      */
     operator fun contains(key: String): Boolean {
-        val prefs = PreferenceManager.getDefaultSharedPreferences(App.context)
+        val prefs = PreferenceManager.getDefaultSharedPreferences(Utils.app)
         return prefs.contains(key)
     }
 
@@ -154,7 +153,7 @@ object SharedUtil {
      */
     fun clear(key: String) {
         val editor = PreferenceManager.getDefaultSharedPreferences(
-                App.context).edit()
+                Utils.app).edit()
         editor.remove(key)
         editor.apply()
     }
@@ -164,7 +163,7 @@ object SharedUtil {
      */
     fun clearAll() {
         val editor = PreferenceManager.getDefaultSharedPreferences(
-                App.context).edit()
+                Utils.app).edit()
         editor.clear()
         editor.apply()
     }

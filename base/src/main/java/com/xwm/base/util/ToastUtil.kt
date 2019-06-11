@@ -1,8 +1,7 @@
-package com.xwm.androidproject.util
+package com.xwm.base.util
 
 import android.text.TextUtils
 import android.widget.Toast
-import com.xwm.androidproject.App
 
 /**
  * Toast消息辅助类
@@ -18,7 +17,7 @@ object ToastUtil {
     fun showShort(msg: String) {
         toast.cancel()
         if (!TextUtils.isEmpty(msg)) {
-            toast = Toast.makeText(App.context, msg, Toast.LENGTH_SHORT)
+            toast = Toast.makeText(Utils.app, msg, Toast.LENGTH_SHORT)
             toast.show()
         }
     }
@@ -30,7 +29,7 @@ object ToastUtil {
      */
     fun showShort(resId: Int) {
         toast.cancel()
-        toast = Toast.makeText(App.context, resId, Toast.LENGTH_SHORT)
+        toast = Toast.makeText(Utils.app, resId, Toast.LENGTH_SHORT)
         toast.show()
     }
 
@@ -43,7 +42,7 @@ object ToastUtil {
     fun showLong(msg: String) {
         toast.cancel()
         if (!TextUtils.isEmpty(msg)) {
-            toast = Toast.makeText(App.context, msg, Toast.LENGTH_LONG)
+            toast = Toast.makeText(Utils.app, msg, Toast.LENGTH_LONG)
             toast.show()
         }
     }
@@ -55,7 +54,7 @@ object ToastUtil {
      */
     fun showLong(resId: Int) {
         toast.cancel()
-        toast = Toast.makeText(App.context, resId, Toast.LENGTH_LONG)
+        toast = Toast.makeText(Utils.app, resId, Toast.LENGTH_LONG)
         toast.show()
     }
 }

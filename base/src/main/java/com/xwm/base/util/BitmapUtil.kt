@@ -1,4 +1,4 @@
-package com.xwm.androidproject.util
+package com.xwm.base.util
 
 import android.content.res.Resources
 import android.graphics.Bitmap

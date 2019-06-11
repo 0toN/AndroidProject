@@ -1,4 +1,4 @@
-package com.xwm.androidproject.view
+package com.xwm.base.view
 
 import android.content.Context
 import android.graphics.Paint

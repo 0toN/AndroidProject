@@ -1,4 +1,4 @@
-package com.xwm.androidproject.util
+package com.xwm.base.util
 
 import android.Manifest.permission.WRITE_EXTERNAL_STORAGE
 import android.annotation.SuppressLint
@@ -7,7 +7,6 @@ import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Environment
 import androidx.annotation.RequiresPermission
-import com.xwm.androidproject.App
 import java.io.*
 import java.lang.Thread.UncaughtExceptionHandler
 import java.text.SimpleDateFormat
@@ -30,14 +29,6 @@ class CrashUtil {
         throw UnsupportedOperationException("u can't instantiate me...")
     }
 
-    ///////////////////////////////////////////////////////////////////////////
-    // interface
-    ///////////////////////////////////////////////////////////////////////////
-
-    interface OnCrashListener {
-        fun onCrash(crashInfo: String, e: Throwable?)
-    }
-
     companion object {
         private val TAG = "CrashUtil"
 
@@ -46,7 +37,7 @@ class CrashUtil {
         private var defaultDir: String? = null
         private var dir: String? = null
         private var versionName: String? = null
-        private var versionCode: Int = 0
+        private var versionCode: Int? = 0
 
         private val FILE_SEP = System.getProperty("file.separator")
         @SuppressLint("SimpleDateFormat")
@@ -58,14 +49,11 @@ class CrashUtil {
         private var sOnCrashListener: OnCrashListener? = null
 
         init {
-            appContext = App.context
+            appContext = Utils.app
             try {
-                val pi = appContext!!.packageManager
-                        .getPackageInfo(appContext!!.packageName, 0)
-                if (pi != null) {
-                    versionName = pi.versionName
-                    versionCode = pi.versionCode
-                }
+                val pi = appContext?.packageManager?.getPackageInfo(appContext?.packageName, 0)
+                versionName = pi?.versionName
+                versionCode = pi?.versionCode
             } catch (e: PackageManager.NameNotFoundException) {
                 e.printStackTrace()
             }
@@ -260,18 +248,12 @@ class CrashUtil {
             return true
         }
     }
+
+    ///////////////////////////////////////////////////////////////////////////
+    // interface
+    ///////////////////////////////////////////////////////////////////////////
+
+    interface OnCrashListener {
+        fun onCrash(crashInfo: String, e: Throwable?)
+    }
 }
-/**
- * Initialization.
- *
- * Must hold
- * `<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />`
- */
-/**
- * Initialization
- *
- * Must hold
- * `<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />`
- *
- * @param crashDirPath The directory's path of saving crash information.
- */
