@@ -7,7 +7,7 @@ import android.widget.Toast
  * Toast消息辅助类
  */
 object ToastUtil {
-    private lateinit var toast: Toast
+    private var toast: Toast? = null
 
     /**
      * 显示Toast短消息
@@ -15,10 +15,10 @@ object ToastUtil {
      * @param msg 内容
      */
     fun showShort(msg: String) {
-        toast.cancel()
+        toast?.cancel()
         if (!TextUtils.isEmpty(msg)) {
             toast = Toast.makeText(Utils.app, msg, Toast.LENGTH_SHORT)
-            toast.show()
+            toast?.show()
         }
     }
 
@@ -28,9 +28,9 @@ object ToastUtil {
      * @param resId String id
      */
     fun showShort(resId: Int) {
-        toast.cancel()
+        toast?.cancel()
         toast = Toast.makeText(Utils.app, resId, Toast.LENGTH_SHORT)
-        toast.show()
+        toast?.show()
     }
 
 
@@ -40,10 +40,10 @@ object ToastUtil {
      * @param msg 内容
      */
     fun showLong(msg: String) {
-        toast.cancel()
+        toast?.cancel()
         if (!TextUtils.isEmpty(msg)) {
             toast = Toast.makeText(Utils.app, msg, Toast.LENGTH_LONG)
-            toast.show()
+            toast?.show()
         }
     }
 
@@ -53,8 +53,8 @@ object ToastUtil {
      * @param resId String id
      */
     fun showLong(resId: Int) {
-        toast.cancel()
+        toast?.cancel()
         toast = Toast.makeText(Utils.app, resId, Toast.LENGTH_LONG)
-        toast.show()
+        toast?.show()
     }
 }

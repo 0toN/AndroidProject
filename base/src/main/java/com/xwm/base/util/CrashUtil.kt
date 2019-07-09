@@ -2,7 +2,6 @@ package com.xwm.base.util
 
 import android.Manifest.permission.WRITE_EXTERNAL_STORAGE
 import android.annotation.SuppressLint
-import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Environment
@@ -23,16 +22,10 @@ import java.util.concurrent.Executors
  * desc  : utils about crash
 </pre> *
  */
-class CrashUtil {
-
-    init {
-        throw UnsupportedOperationException("u can't instantiate me...")
-    }
+class CrashUtil private constructor() {
 
     companion object {
         private val TAG = "CrashUtil"
-
-        private var appContext: Context? = null
 
         private var defaultDir: String? = null
         private var dir: String? = null
@@ -49,11 +42,10 @@ class CrashUtil {
         private var sOnCrashListener: OnCrashListener? = null
 
         init {
-            appContext = Utils.app
             try {
-                val pi = appContext?.packageManager?.getPackageInfo(appContext?.packageName, 0)
-                versionName = pi?.versionName
-                versionCode = pi?.versionCode
+                val pi = Utils.app.packageManager.getPackageInfo(Utils.app.packageName, 0)
+                versionName = pi.versionName
+                versionCode = pi.versionCode
             } catch (e: PackageManager.NameNotFoundException) {
                 e.printStackTrace()
             }
@@ -167,10 +159,10 @@ class CrashUtil {
             } else {
                 dir = if (crashDirPath.endsWith(FILE_SEP!!)) crashDirPath else crashDirPath + FILE_SEP
             }
-            if (Environment.MEDIA_MOUNTED == Environment.getExternalStorageState() && appContext!!.externalCacheDir != null) {
-                defaultDir = appContext!!.externalCacheDir.toString() + FILE_SEP + "crash" + FILE_SEP
+            if (Environment.MEDIA_MOUNTED == Environment.getExternalStorageState() && Utils.app.externalCacheDir != null) {
+                defaultDir = Utils.app.externalCacheDir.toString() + FILE_SEP + "crash" + FILE_SEP
             } else {
-                defaultDir = appContext!!.cacheDir.toString() + FILE_SEP + "crash" + FILE_SEP
+                defaultDir = Utils.app.cacheDir.toString() + FILE_SEP + "crash" + FILE_SEP
             }
             sOnCrashListener = onCrashListener
             Thread.setDefaultUncaughtExceptionHandler(UNCAUGHT_EXCEPTION_HANDLER)

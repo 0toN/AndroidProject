@@ -26,9 +26,8 @@ class Utils private constructor() {
     companion object {
 
         internal val activityLifecycle = ActivityLifecycleImpl()
-        private val UTIL_POOL = Executors.newFixedThreadPool(3)
-        private val UTIL_HANDLER = Handler(Looper.getMainLooper())
-
+        private val mThreadPool = Executors.newFixedThreadPool(3)
+        private val mHandler = Handler(Looper.getMainLooper())
         private var sApplication: Application? = null
 
         /**
@@ -102,7 +101,7 @@ class Utils private constructor() {
             }
 
         internal fun <T> doAsync(task: Task<T>): Task<T> {
-            UTIL_POOL.execute(task)
+            mThreadPool.execute(task)
             return task
         }
 
@@ -110,12 +109,12 @@ class Utils private constructor() {
             if (Looper.myLooper() == Looper.getMainLooper()) {
                 runnable.run()
             } else {
-                Utils.UTIL_HANDLER.post(runnable)
+                mHandler.post(runnable)
             }
         }
 
         fun runOnUiThreadDelayed(runnable: Runnable, delayMillis: Long) {
-            Utils.UTIL_HANDLER.postDelayed(runnable, delayMillis)
+            mHandler.postDelayed(runnable, delayMillis)
         }
 
         val currentProcessName: String
@@ -476,7 +475,7 @@ class Utils private constructor() {
                     return
                 }
                 state = COMPLETING
-                UTIL_HANDLER.post { mCallback.onCall(t) }
+                mHandler.post { mCallback.onCall(t) }
             } catch (th: Throwable) {
                 if (state != NEW) {
                     return

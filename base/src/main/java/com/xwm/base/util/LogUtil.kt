@@ -29,6 +29,18 @@ object LogUtil {
         log(Log.ERROR, content)
     }
 
+    fun v(tag: String, content: String) {
+        log(Log.VERBOSE, tag, content)
+    }
+
+    fun w(tag: String, content: String) {
+        log(Log.WARN, tag, content)
+    }
+
+    fun i(tag: String, content: String) {
+        log(Log.INFO, tag, content)
+    }
+
     fun d(tag: String, content: String) {
         log(Log.DEBUG, tag, content)
     }

@@ -6,19 +6,17 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.os.SystemClock
 import android.view.Window
-import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
-
+import com.trello.rxlifecycle3.components.support.RxAppCompatDialogFragment
 import com.xwm.base.R
 import com.xwm.base.util.LogUtil
-
 import org.greenrobot.eventbus.EventBus
 
 /**
  * @author Created by Adam on 2018-08-21
  */
-class BaseDialogFragment : DialogFragment() {
+class BaseDialogFragment : RxAppCompatDialogFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,7 +55,7 @@ class BaseDialogFragment : DialogFragment() {
      */
     override fun show(manager: FragmentManager, tag: String) {
         try {
-            if (isRepeatedShow(tag)) {
+            if (!isRepeatedShow(tag)) {
                 super.show(manager, tag)
             }
         } catch (exception: IllegalStateException) {
@@ -67,7 +65,7 @@ class BaseDialogFragment : DialogFragment() {
     }
 
     override fun show(transaction: FragmentTransaction, tag: String): Int {
-        return if (isRepeatedShow(tag)) {
+        return if (!isRepeatedShow(tag)) {
             super.show(transaction, tag)
         } else -1
     }

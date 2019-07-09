@@ -24,14 +24,14 @@ object BlurUtil {
      * @return
      */
     fun rsBlur(context: Context, source: Bitmap, radius: Int, scale: Float): Bitmap {
-        Log.i(TAG, "origin size:" + source.width + "*" + source.height)
+        LogUtil.i(TAG, "origin size:${source.width}*${source.height}")
 
         val width = Math.round(source.width * scale)
         val height = Math.round(source.height * scale)
 
         val inputBmp = Bitmap.createScaledBitmap(source, width, height, false)
 
-        Log.i(TAG, "scale size:" + inputBmp.width + "*" + inputBmp.height)
+        LogUtil.i(TAG, "scale size:${inputBmp.width}*${inputBmp.height}")
 
         val renderScript = RenderScript.create(context)
 
