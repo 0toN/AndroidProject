@@ -53,10 +53,10 @@ open class BaseActivity : RxAppCompatActivity() {
         val tag: String
         if (intent.component != null) {
             // 显式跳转
-            tag = intent.component.className
+            tag = intent.component!!.className
         } else if (intent.action != null) {
             // 隐式跳转
-            tag = intent.action
+            tag = intent.action!!
         } else {
             // 其他方式
             return true

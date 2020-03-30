@@ -391,7 +391,7 @@ class Utils private constructor() {
             val dm = resources.displayMetrics
             val config = resources.configuration
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                config.locales = activity.resources.configuration.locales
+                config.setLocales(activity.resources.configuration.locales)
             } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
                 config.setLocale(activity.resources.configuration.locale)
             }
@@ -435,7 +435,6 @@ class Utils private constructor() {
             for (leakView in leakViews) {
                 try {
                     val leakViewField = InputMethodManager::class.java.getDeclaredField(leakView)
-                            ?: continue
                     if (!leakViewField.isAccessible) {
                         leakViewField.isAccessible = true
                     }

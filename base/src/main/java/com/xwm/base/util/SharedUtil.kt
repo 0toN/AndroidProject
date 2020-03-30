@@ -2,6 +2,7 @@ package com.xwm.base.util
 
 import android.preference.PreferenceManager
 
+
 /**
  * SharedPreferences工具类，提供简单的封装接口，简化SharedPreferences的用法。
  *
@@ -130,7 +131,7 @@ object SharedUtil {
      * @param defValue 如果读取不到值，返回的默认值
      * @return String类型的值，如果读取不到，则返回默认值
      */
-    fun read(key: String, defValue: String): String {
+    fun read(key: String, defValue: String): String? {
         val prefs = PreferenceManager.getDefaultSharedPreferences(Utils.app)
         return prefs.getString(key, defValue)
     }

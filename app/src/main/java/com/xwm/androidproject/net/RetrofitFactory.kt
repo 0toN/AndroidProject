@@ -112,7 +112,7 @@ class RetrofitFactory private constructor() {
     companion object {
         private const val TAG = "RetrofitFactory"
 
-        private val TIME_OUT: Long = 10L
+        private const val TIME_OUT: Long = 10L
 
         val instance: RetrofitFactory = Holder.retrofitFactory
 

@@ -32,13 +32,13 @@ android {
 dependencies {
     api fileTree(dir: 'libs', include: ['*.jar'])
     api rootProject.ext.dependencies["kotlin-stdlib-jdk8"]
+    api rootProject.ext.dependencies["kotlinx-coroutines-android"]
     api rootProject.ext.dependencies["core-ktx"]
     api rootProject.ext.dependencies["appcompat"]
     api rootProject.ext.dependencies["material"]
     api rootProject.ext.dependencies["recyclerview"]
     api rootProject.ext.dependencies["constraint-layout"]
     api rootProject.ext.dependencies["multidex"]
-    api 'androidx.legacy:legacy-support-v4:1.0.0'
 
     api rootProject.ext.dependencies["retrofit"]
     api rootProject.ext.dependencies["rxjava"]
@@ -51,7 +51,7 @@ dependencies {
 
     //    api rootProject.ext.dependencies["autosize"]
     api rootProject.ext.dependencies["glide"]
-    kapt rootProject.ext.dependencies["glide_compiler"]
+    kapt rootProject.ext.dependencies["glide-compiler"]
     api rootProject.ext.dependencies["eventbus"]
 //    api rootProject.ext.dependencies["circleimageview"]
 //    api rootProject.ext.dependencies["BasePopup"]

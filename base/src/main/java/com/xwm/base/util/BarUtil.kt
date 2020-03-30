@@ -1,9 +1,6 @@
 package com.xwm.base.util
 
 import android.Manifest.permission.EXPAND_STATUS_BAR
-import android.annotation.ColorInt
-import android.annotation.NonNull
-import android.annotation.RequiresPermission
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
@@ -18,7 +15,10 @@ import android.util.TypedValue
 import android.view.*
 import android.view.ViewGroup
 import android.view.ViewGroup.MarginLayoutParams
+import androidx.annotation.ColorInt
+import androidx.annotation.NonNull
 import androidx.annotation.RequiresApi
+import androidx.annotation.RequiresPermission
 import androidx.drawerlayout.widget.DrawerLayout
 import com.xwm.base.R
 

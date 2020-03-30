@@ -7,15 +7,17 @@ import io.reactivex.Observable
 /**
  * Created by xwm on 2019-05-12
  */
-class RetrofitService {
+interface IRetrofitService {
 
-    private val api by lazy {
-        RetrofitFactory.instance.create(API::class.java)
+    companion object {
+        private val api by lazy {
+            RetrofitFactory.instance.create(API::class.java)
+        }
     }
 
     fun test(): Observable<TestBean> {
         val map = ArrayMap<String, Any>()
-        map.put("key", "value")
+        map["key"] = "value"
         return api.test(map)
     }
 }

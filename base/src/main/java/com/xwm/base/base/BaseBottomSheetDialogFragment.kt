@@ -41,8 +41,8 @@ open class BaseBottomSheetDialogFragment : BottomSheetDialogFragment() {
         if (maxHeightPx <= 0) {
             return
         }
-        dialog.window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, maxHeightPx)
-        dialog.window.setGravity(Gravity.BOTTOM)
+        dialog?.window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, maxHeightPx)
+        dialog?.window?.setGravity(Gravity.BOTTOM)
     }
 
     private fun setBottomSheetBehavior() {
