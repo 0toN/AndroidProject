@@ -599,12 +599,16 @@ class TimeUtil private constructor() {
             }
             // 获取当天 00:00
             val wee = weeOfToday
-            return if (millis >= wee) {
-                String.format("今天%tR", millis)
-            } else if (millis >= wee - TimeConstants.DAY) {
-                String.format("昨天%tR", millis)
-            } else {
-                String.format("%tF", millis)
+            return when {
+                millis >= wee -> {
+                    String.format("今天%tR", millis)
+                }
+                millis >= wee - TimeConstants.DAY -> {
+                    String.format("昨天%tR", millis)
+                }
+                else -> {
+                    String.format("%tF", millis)
+                }
             }
         }
 

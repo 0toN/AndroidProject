@@ -51,15 +51,19 @@ open class BaseActivity : RxAppCompatActivity() {
         var result = true
         // 标记对象
         val tag: String
-        if (intent.component != null) {
-            // 显式跳转
-            tag = intent.component!!.className
-        } else if (intent.action != null) {
-            // 隐式跳转
-            tag = intent.action!!
-        } else {
-            // 其他方式
-            return true
+        when {
+            intent.component != null -> {
+                // 显式跳转
+                tag = intent.component!!.className
+            }
+            intent.action != null -> {
+                // 隐式跳转
+                tag = intent.action!!
+            }
+            else -> {
+                // 其他方式
+                return true
+            }
         }
 
         if (tag == mStartActivityTag && mStartActivityTime >= SystemClock.uptimeMillis() - 500) {

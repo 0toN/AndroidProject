@@ -1,12 +1,10 @@
 package com.xwm.base.base
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.trello.rxlifecycle3.components.support.RxAppCompatActivity
 import com.trello.rxlifecycle3.components.support.RxFragment
 import org.greenrobot.eventbus.EventBus
 
@@ -14,14 +12,8 @@ import org.greenrobot.eventbus.EventBus
  * @author Created by Adam on 2019-02-15
  */
 abstract class BaseFragment : RxFragment() {
-    protected var mActivity: RxAppCompatActivity? = null
     // 根布局
     protected var mRootView: View? = null
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        mActivity = context as RxAppCompatActivity
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,8 +29,11 @@ abstract class BaseFragment : RxFragment() {
         return mRootView
     }
 
-    //引入布局
-    protected abstract fun setLayoutId(): Int
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initVar()
+        initView()
+    }
 
     /**
      * 需要注册EventBus，则重写该方法 并返回 true
@@ -68,4 +63,13 @@ abstract class BaseFragment : RxFragment() {
         }
         super.onDestroy()
     }
+
+    //初始化变量
+    protected abstract fun initVar()
+
+    //初始化控件
+    protected abstract fun initView()
+
+    //引入布局
+    protected abstract fun setLayoutId(): Int
 }
