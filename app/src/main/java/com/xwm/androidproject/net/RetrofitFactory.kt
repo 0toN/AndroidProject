@@ -7,8 +7,8 @@ import com.xwm.base.util.Utils
 import okhttp3.*
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.converter.scalars.ScalarsConverterFactory
 import java.io.File
 import java.util.concurrent.TimeUnit
 
@@ -38,11 +38,11 @@ class RetrofitFactory private constructor() {
         // 创建Retrofit实例
         builder = Retrofit.Builder()
                 .client(okHttpClient)
+                .addConverterFactory(ScalarsConverterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
 
-        if (!TextUtils.isEmpty(ServerConfig.SERVER_MAIN)) {
-            retrofit = builder.baseUrl(ServerConfig.SERVER_MAIN).build()
+        if (!TextUtils.isEmpty(API.BASE_URL)) {
+            retrofit = builder.baseUrl(API.BASE_URL).build()
         }
     }
 

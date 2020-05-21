@@ -35,17 +35,17 @@ dependencies {
     api rootProject.ext.dependencies["kotlinx-coroutines-android"]
     api rootProject.ext.dependencies["core-ktx"]
     api rootProject.ext.dependencies["appcompat"]
+    api rootProject.ext.dependencies["viewpager2"]
     api rootProject.ext.dependencies["material"]
     api rootProject.ext.dependencies["recyclerview"]
     api rootProject.ext.dependencies["constraint-layout"]
     api rootProject.ext.dependencies["multidex"]
 
+//    api rootProject.ext.dependencies["gloading"]
+
     api rootProject.ext.dependencies["retrofit"]
-    api rootProject.ext.dependencies["rxjava"]
-    api rootProject.ext.dependencies["rxandroid"]
-    api rootProject.ext.dependencies["rxlifecycle-components"]
     api rootProject.ext.dependencies["converter-gson"]
-    api rootProject.ext.dependencies["adapter-rxjava2"]
+    api rootProject.ext.dependencies["converter-scalars"]
     api rootProject.ext.dependencies["logging-interceptor"]
     api rootProject.ext.dependencies["gson"]
 
@@ -59,12 +59,9 @@ dependencies {
 //    api rootProject.ext.dependencies["permissionsdispatcher"]
 //    kapt rootProject.ext.dependencies["permissionsdispatcher-processor"]
 
-    debugApi rootProject.ext.dependencies["leakcanary"]
-    releaseApi rootProject.ext.dependencies["leakcanary-android-no-op"]
-    debugApi rootProject.ext.dependencies["leakcanary-support-fragment"]
-
     debugImplementation rootProject.ext.dependencies["doraemonkit"]
-    releaseApi rootProject.ext.dependencies["doraemonkit-no-op"]
+    debugImplementation rootProject.ext.dependencies["doraemonkit-leakcanary"]
+    releaseImplementation rootProject.ext.dependencies["doraemonkit-no-op"]
 
     api rootProject.ext.dependencies["junit"]
     api rootProject.ext.dependencies["runner"]

@@ -6,9 +6,9 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.os.SystemClock
 import android.view.Window
+import androidx.appcompat.app.AppCompatDialogFragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
-import com.trello.rxlifecycle3.components.support.RxAppCompatDialogFragment
 import com.xwm.base.R
 import com.xwm.base.util.LogUtil
 import org.greenrobot.eventbus.EventBus
@@ -16,7 +16,7 @@ import org.greenrobot.eventbus.EventBus
 /**
  * @author Created by Adam on 2018-08-21
  */
-class BaseDialogFragment : RxAppCompatDialogFragment() {
+class BaseDialogFragment : AppCompatDialogFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

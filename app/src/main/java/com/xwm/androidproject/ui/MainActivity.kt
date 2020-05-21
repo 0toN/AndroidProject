@@ -4,9 +4,10 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import com.xwm.androidproject.databinding.ActivityMainBinding
+import com.xwm.androidproject.net.Network
 import com.xwm.base.base.BaseActivity
+import com.xwm.base.util.LogUtil
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.net.HttpURLConnection
@@ -15,6 +16,8 @@ import java.net.URL
 
 class MainActivity : BaseActivity() {
 
+    private val network by lazy { Network.instance }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -22,14 +25,18 @@ class MainActivity : BaseActivity() {
         setContentView(binding.root)
 
         binding.btnTest.setOnClickListener {
-            GlobalScope.launch(Dispatchers.Main) {
-                val bitmap = suspendLoadImage()
-                bitmap?.let {
-                    val bitmap1 = suspendCropBitmap(it, 2, 2, 0, 0)
-                    val bitmap2 = suspendCropBitmap(it, 3, 3, 2, 2)
-                    binding.iv1.setImageBitmap(bitmap1)
-                    binding.iv2.setImageBitmap(bitmap2)
-                }
+//            launch {
+//                val bitmap = suspendLoadImage()
+//                bitmap?.let {
+//                    val bitmap1 = suspendCropBitmap(it, 2, 2, 0, 0)
+//                    val bitmap2 = suspendCropBitmap(it, 3, 3, 2, 2)
+//                    binding.iv1.setImageBitmap(bitmap1)
+//                    binding.iv2.setImageBitmap(bitmap2)
+//                }
+//            }
+            launch {
+                val testBean = network.test()
+                LogUtil.e("xxxxxxx testBEan  =" + testBean.data.name)
             }
         }
     }

@@ -1,17 +1,17 @@
 package com.xwm.androidproject.net
 
 import com.google.gson.annotations.SerializedName
-import com.xwm.androidproject.constants.HttpConfig
+import com.xwm.androidproject.constants.Constants
 
 /**
- * @author Created by Adam
+ * @author Created by xwm
  */
 open class BaseEntity {
     @SerializedName("code")
     var code: Int = 0
+
     @SerializedName("msg")
     var msg: String? = null
 
-    val isSuccess: Boolean
-        get() = code == HttpConfig.HTTP_CODE_REQUEST_SUCCESS
+    val isSuccess = code == Constants.HTTP_CODE_REQUEST_SUCCESS
 }

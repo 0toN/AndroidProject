@@ -5,13 +5,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.trello.rxlifecycle3.components.support.RxFragment
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.cancel
 import org.greenrobot.eventbus.EventBus
 
 /**
  * @author Created by Adam on 2019-02-15
  */
-abstract class BaseFragment : RxFragment() {
+abstract class BaseFragment : Fragment(), CoroutineScope by MainScope() {
     // 根布局
     protected var mRootView: View? = null
 
@@ -29,8 +31,8 @@ abstract class BaseFragment : RxFragment() {
         return mRootView
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
         initVar()
         initView()
     }
@@ -61,6 +63,7 @@ abstract class BaseFragment : RxFragment() {
         if (regEvent()) {
             EventBus.getDefault().unregister(this)
         }
+        cancel()
         super.onDestroy()
     }
 

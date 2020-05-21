@@ -4,14 +4,17 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.os.SystemClock
-import com.trello.rxlifecycle3.components.support.RxAppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.cancel
 import org.greenrobot.eventbus.EventBus
 
 /**
  * @author Created by Adam on 2018-10-26
  */
 @SuppressLint("Registered")
-open class BaseActivity : RxAppCompatActivity() {
+open class BaseActivity : AppCompatActivity(), CoroutineScope by MainScope() {
 
     private var mStartActivityTag: String? = null
     private var mStartActivityTime: Long = 0
@@ -80,6 +83,24 @@ open class BaseActivity : RxAppCompatActivity() {
         if (regEvent()) {
             EventBus.getDefault().unregister(this)
         }
+        //取消当前Activity的协程
+        cancel()
         super.onDestroy()
     }
+
+//    fun launch(
+//            block: suspend CoroutineScope.() -> Unit,
+//            error: suspend CoroutineScope.(Throwable) -> Unit = {},
+//            complete: suspend CoroutineScope.() -> Unit = {}
+//    ) {
+//        launch {
+//            try {
+//                block()
+//            } catch (e: Throwable) {
+//                error(e)
+//            } finally {
+//                complete()
+//            }
+//        }
+//    }
 }

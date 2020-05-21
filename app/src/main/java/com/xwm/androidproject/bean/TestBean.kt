@@ -7,4 +7,4 @@ import com.xwm.androidproject.net.BaseEntity
  */
 data class TestBean(val data: ResultBean) : BaseEntity()
 
-data class ResultBean(val id: Int, val name: String)
+data class ResultBean(val name: String)
