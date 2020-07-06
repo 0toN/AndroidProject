@@ -1,6 +1,6 @@
 apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'com.didi.dokit'
 
@@ -8,8 +8,10 @@ android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
     buildToolsVersion rootProject.ext.android.buildToolsVersion
 
-    // 开启视图绑定
+    //视图绑定
     viewBinding.enabled = true
+    //数据绑定
+    dataBinding.enabled = true
 
     defaultConfig {
         applicationId rootProject.ext.android.applicationId
@@ -63,5 +65,4 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation project(":base")
-    kapt rootProject.ext.dependencies["glide-compiler"]
 }

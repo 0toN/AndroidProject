@@ -3,12 +3,11 @@ package com.xwm.androidproject.ui
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
+import androidx.lifecycle.ViewModelProvider
 import com.xwm.androidproject.databinding.ActivityMainBinding
-import com.xwm.androidproject.net.Network
+import com.xwm.androidproject.util.InjectorUtil
 import com.xwm.base.base.BaseActivity
-import com.xwm.base.util.LogUtil
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.net.HttpURLConnection
 import java.net.URL
@@ -16,13 +15,18 @@ import java.net.URL
 
 class MainActivity : BaseActivity() {
 
-    private val network by lazy { Network.instance }
+    private val viewModel by lazy {
+        ViewModelProvider(this, InjectorUtil.getMainModelFactory()).get(MainViewModel::class.java)
+    }
+
+    private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = this
 
         binding.btnTest.setOnClickListener {
 //            launch {
@@ -34,10 +38,7 @@ class MainActivity : BaseActivity() {
 //                    binding.iv2.setImageBitmap(bitmap2)
 //                }
 //            }
-            launch {
-                val testBean = network.test()
-                LogUtil.e("xxxxxxx testBEan  =" + testBean.data.name)
-            }
+            viewModel.getName()
         }
     }
 

@@ -41,6 +41,12 @@ dependencies {
     api rootProject.ext.dependencies["constraint-layout"]
     api rootProject.ext.dependencies["multidex"]
 
+    api rootProject.ext.dependencies["lifecycle-viewmodel"]
+    api rootProject.ext.dependencies["lifecycle-livedata"]
+    api rootProject.ext.dependencies["room-runtime"]
+    api rootProject.ext.dependencies["room-ktx"]
+    kapt rootProject.ext.dependencies["room-compiler"]
+
 //    api rootProject.ext.dependencies["gloading"]
 
     api rootProject.ext.dependencies["retrofit"]

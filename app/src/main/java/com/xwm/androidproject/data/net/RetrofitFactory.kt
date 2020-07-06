@@ -1,4 +1,4 @@
-package com.xwm.androidproject.net
+package com.xwm.androidproject.data.net
 
 import android.text.TextUtils
 import com.xwm.base.util.LogUtil

@@ -87,20 +87,4 @@ open class BaseActivity : AppCompatActivity(), CoroutineScope by MainScope() {
         cancel()
         super.onDestroy()
     }
-
-//    fun launch(
-//            block: suspend CoroutineScope.() -> Unit,
-//            error: suspend CoroutineScope.(Throwable) -> Unit = {},
-//            complete: suspend CoroutineScope.() -> Unit = {}
-//    ) {
-//        launch {
-//            try {
-//                block()
-//            } catch (e: Throwable) {
-//                error(e)
-//            } finally {
-//                complete()
-//            }
-//        }
-//    }
 }

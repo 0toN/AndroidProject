@@ -20,7 +20,8 @@
         tools:targetApi="n">
         <activity
             android:name=".ui.MainActivity"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/ActivityTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -28,11 +28,8 @@ class BaseDialogFragment : AppCompatDialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val dialog = super.onCreateDialog(savedInstanceState)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        val window = dialog.window
-        if (window != null) {
-            window.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-            window.setWindowAnimations(R.style.DialogFragmentAnimation)
-        }
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.window?.setWindowAnimations(R.style.DialogFragmentAnimation)
         dialog.setCanceledOnTouchOutside(false)
         return dialog
     }
@@ -60,6 +57,9 @@ class BaseDialogFragment : AppCompatDialogFragment() {
             }
         } catch (exception: IllegalStateException) {
             LogUtil.e(exception)
+            manager.beginTransaction()
+                    .add(this, tag)
+                    .commitAllowingStateLoss()
         }
 
     }
