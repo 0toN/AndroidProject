@@ -4,8 +4,6 @@ import com.xwm.androidproject.data.db.MainDao
 import com.xwm.androidproject.data.net.Network
 import com.xwm.androidproject.data.net.Result
 import com.xwm.base.util.ToastUtil
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 
 /**
  * Created by xwm on 2020/6/29
@@ -15,16 +13,14 @@ class MainRepository private constructor(private val mainDao: MainDao, private v
     suspend fun getName(): String? {
         var name = mainDao.getCachedName()
         if (name == null) {
-            withContext(Dispatchers.IO) {
-                val result = network.getName()
-                when (result) {
-                    is Result.Success -> {
-                        name = result.data.name
-                        mainDao.cacheName(name)
-                    }
-                    is Result.Failure -> {
-                        ToastUtil.showShort(result.errorMsg)
-                    }
+            val result = network.getName()
+            when (result) {
+                is Result.Success -> {
+                    name = result.data.name
+                    mainDao.cacheName(name)
+                }
+                is Result.Failure -> {
+                    ToastUtil.showShort(result.errorMsg)
                 }
             }
         }

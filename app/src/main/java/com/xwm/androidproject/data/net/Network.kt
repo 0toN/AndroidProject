@@ -30,7 +30,6 @@ class Network private constructor() {
     }
 
     companion object {
-        private const val TAG = "Repository"
 
         private lateinit var instance: Network
 

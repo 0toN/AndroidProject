@@ -4,7 +4,9 @@ import android.app.ActivityManager
 import android.app.Application
 import android.content.Context
 import com.didichuxing.doraemonkit.DoraemonKit
+import com.tencent.mmkv.MMKV
 import com.xwm.base.util.Utils
+
 
 /**
  * Created by xwm on 2019-06-06
@@ -22,6 +24,7 @@ class AppConfig {
         if (shouldInit(app)) {
             DoraemonKit.install(app, "a8be61c3898d0a9ac0f4eee66680f58c")
         }
+        MMKV.initialize(app)
     }
 
     private fun shouldInit(app: Application): Boolean {

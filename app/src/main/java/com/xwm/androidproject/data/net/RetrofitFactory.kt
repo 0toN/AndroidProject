@@ -30,7 +30,7 @@ class RetrofitFactory private constructor() {
                 .writeTimeout(TIME_OUT, TimeUnit.SECONDS)
                 .retryOnConnectionFailure(true)
                 .addInterceptor(HttpLoggingInterceptor { message -> LogUtil.e(TAG, message) }.setLevel(HttpLoggingInterceptor.Level.BODY))
-                .addInterceptor(CacheIntercepter())
+                .addInterceptor(CacheInterceptor())
                 .addNetworkInterceptor(CacheNetworkInterceptor())
                 .cache(cache)
                 .build()
@@ -46,7 +46,7 @@ class RetrofitFactory private constructor() {
         }
     }
 
-    internal class CacheNetworkInterceptor : Interceptor {
+    class CacheNetworkInterceptor : Interceptor {
         override fun intercept(chain: Interceptor.Chain): Response {
             //无缓存，进行缓存
             val response = chain.proceed(chain.request())
@@ -58,7 +58,7 @@ class RetrofitFactory private constructor() {
         }
     }
 
-    internal class CacheIntercepter : Interceptor {
+    class CacheInterceptor : Interceptor {
         override fun intercept(chain: Interceptor.Chain): Response {
             val response: Response
             val request: Request

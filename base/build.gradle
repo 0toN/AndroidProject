@@ -41,6 +41,7 @@ dependencies {
     api rootProject.ext.dependencies["constraint-layout"]
     api rootProject.ext.dependencies["multidex"]
 
+    api rootProject.ext.dependencies["lifecycle-runtime"]
     api rootProject.ext.dependencies["lifecycle-viewmodel"]
     api rootProject.ext.dependencies["lifecycle-livedata"]
     api rootProject.ext.dependencies["room-runtime"]
@@ -56,14 +57,14 @@ dependencies {
     api rootProject.ext.dependencies["gson"]
 
     //    api rootProject.ext.dependencies["autosize"]
+    api rootProject.ext.dependencies["mmkv-static"]
     api rootProject.ext.dependencies["glide"]
     kapt rootProject.ext.dependencies["glide-compiler"]
     api rootProject.ext.dependencies["eventbus"]
 //    api rootProject.ext.dependencies["circleimageview"]
 //    api rootProject.ext.dependencies["BasePopup"]
 //    api rootProject.ext.dependencies["BaseRecyclerViewAdapterHelper"]
-//    api rootProject.ext.dependencies["permissionsdispatcher"]
-//    kapt rootProject.ext.dependencies["permissionsdispatcher-processor"]
+    api rootProject.ext.dependencies["permissionx"]
 
     debugImplementation rootProject.ext.dependencies["doraemonkit"]
     debugImplementation rootProject.ext.dependencies["doraemonkit-leakcanary"]

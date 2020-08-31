@@ -4,8 +4,8 @@ import android.app.Application
 import android.content.ComponentCallbacks2
 import android.content.Context
 import androidx.multidex.MultiDex
+import com.bumptech.glide.Glide
 import com.xwm.base.config.AppConfig
-import com.xwm.base.config.GlideApp
 import com.xwm.base.util.LogUtil
 
 /**
@@ -23,7 +23,6 @@ class App : Application() {
         AppConfig.INSTANCE.initConfig(this)
     }
 
-
     /**
      * 程序终止的时候执行
      */
@@ -39,7 +38,7 @@ class App : Application() {
     override fun onLowMemory() {
         super.onLowMemory()
         LogUtil.d("onLowMemory")
-        GlideApp.get(this).clearMemory()
+        Glide.get(this).clearMemory()
     }
 
     /**
@@ -50,8 +49,8 @@ class App : Application() {
         super.onTrimMemory(level)
         LogUtil.d("onTrimMemory")
         if (level == ComponentCallbacks2.TRIM_MEMORY_UI_HIDDEN) {
-            GlideApp.get(this).clearMemory()
+            Glide.get(this).clearMemory()
         }
-        GlideApp.get(this).trimMemory(level)
+        Glide.get(this).trimMemory(level)
     }
 }

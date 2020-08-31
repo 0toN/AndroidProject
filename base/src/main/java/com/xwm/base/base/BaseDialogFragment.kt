@@ -1,11 +1,16 @@
 package com.xwm.base.base
 
 import android.app.Dialog
+import android.content.Context
+import android.content.DialogInterface
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.os.SystemClock
+import android.view.Gravity
+import android.view.ViewGroup
 import android.view.Window
+import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatDialogFragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
@@ -18,6 +23,8 @@ import org.greenrobot.eventbus.EventBus
  */
 class BaseDialogFragment : AppCompatDialogFragment() {
 
+    private var mOnDismissListener: DialogInterface.OnDismissListener? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (regEvent() && !EventBus.getDefault().isRegistered(this)) {
@@ -28,10 +35,36 @@ class BaseDialogFragment : AppCompatDialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val dialog = super.onCreateDialog(savedInstanceState)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        dialog.window?.setWindowAnimations(R.style.DialogFragmentAnimation)
         dialog.setCanceledOnTouchOutside(false)
         return dialog
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        dialog?.window?.let {
+            it.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            it.setWindowAnimations(getWindowAnimations())
+            // 宽度全屏
+            it.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+            it.attributes.gravity = getGravity()
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (showKeyboard()) {
+            view?.postDelayed({
+                val inManager = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                inManager.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS)
+            }, 500)
+        }
+    }
+
+    override fun onDestroy() {
+        if (regEvent()) {
+            EventBus.getDefault().unregister(this)
+        }
+        super.onDestroy()
     }
 
     /**
@@ -70,6 +103,18 @@ class BaseDialogFragment : AppCompatDialogFragment() {
         } else -1
     }
 
+    open fun getWindowAnimations(): Int {
+        return R.style.CustomDialogFragmentAnimation
+    }
+
+    open fun getGravity(): Int {
+        return Gravity.NO_GRAVITY
+    }
+
+    open fun showKeyboard(): Boolean {
+        return false
+    }
+
     /**
      * 需要注册EventBus，则重写该方法 并返回 true
      */
@@ -77,11 +122,13 @@ class BaseDialogFragment : AppCompatDialogFragment() {
         return false
     }
 
-    override fun onDestroy() {
-        if (regEvent()) {
-            EventBus.getDefault().unregister(this)
-        }
-        super.onDestroy()
+    override fun onDismiss(dialog: DialogInterface) {
+        super.onDismiss(dialog)
+        mOnDismissListener?.onDismiss(dialog)
+    }
+
+    fun setOnDismissListener(listener: DialogInterface.OnDismissListener) {
+        this.mOnDismissListener = listener
     }
 
     companion object {

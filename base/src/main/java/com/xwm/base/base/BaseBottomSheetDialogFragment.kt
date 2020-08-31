@@ -54,7 +54,7 @@ open class BaseBottomSheetDialogFragment : BottomSheetDialogFragment() {
         parent.setBackgroundColor(resources.getColor(android.R.color.transparent))
         val layoutParams = parent.layoutParams as CoordinatorLayout.LayoutParams
         mBehavior = layoutParams.behavior as BottomSheetBehavior
-        mBehavior?.setBottomSheetCallback(mBottomSheetCallback)
+        mBehavior?.addBottomSheetCallback(mBottomSheetCallback)
     }
 
     private val mBottomSheetCallback = object : BottomSheetBehavior.BottomSheetCallback() {

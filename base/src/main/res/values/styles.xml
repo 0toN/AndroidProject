@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="DialogFragmentAnimation">
+    <style name="CustomDialogFragmentAnimation">
         <item name="android:windowEnterAnimation">@anim/dialog_fragment_in</item>
         <item name="android:windowExitAnimation">@anim/dialog_fragment_out</item>
     </style>
