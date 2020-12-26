@@ -1,6 +1,5 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
@@ -65,10 +64,12 @@ dependencies {
 //    api rootProject.ext.dependencies["BasePopup"]
 //    api rootProject.ext.dependencies["BaseRecyclerViewAdapterHelper"]
     api rootProject.ext.dependencies["permissionx"]
+    api rootProject.ext.dependencies["immersionbar"]
 
     debugImplementation rootProject.ext.dependencies["doraemonkit"]
-    debugImplementation rootProject.ext.dependencies["doraemonkit-leakcanary"]
     releaseImplementation rootProject.ext.dependencies["doraemonkit-no-op"]
+
+    debugImplementation rootProject.ext.dependencies["leakcanary"]
 
     api rootProject.ext.dependencies["junit"]
     api rootProject.ext.dependencies["runner"]

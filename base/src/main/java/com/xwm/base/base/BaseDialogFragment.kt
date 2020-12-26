@@ -21,7 +21,7 @@ import org.greenrobot.eventbus.EventBus
 /**
  * @author Created by Adam on 2018-08-21
  */
-class BaseDialogFragment : AppCompatDialogFragment() {
+open class BaseDialogFragment : AppCompatDialogFragment() {
 
     private var mOnDismissListener: DialogInterface.OnDismissListener? = null
 

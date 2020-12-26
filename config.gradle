@@ -3,10 +3,10 @@ ext {
     def room_version = "2.2.5"
 
     android = [
-            compileSdkVersion        : 29,
-            buildToolsVersion        : "29.0.3",
+            compileSdkVersion        : 30,
+            buildToolsVersion        : "30.0.2",
             minSdkVersion            : 21,
-            targetSdkVersion         : 29,
+            targetSdkVersion         : 30,
             versionCode              : 1,
             versionName              : "1.0",
             applicationId            : "com.xwm.androidproject",
@@ -54,6 +54,8 @@ ext {
 
             "permissionx"                  : "com.permissionx.guolindev:permissionx:1.3.1",
 
+            "immersionbar"                 : "com.gyf.immersionbar:immersionbar:3.0.0",
+
             //Glide
             "glide"                        : "com.github.bumptech.glide:glide:4.9.0",
             "glide-compiler"               : "com.github.bumptech.glide:compiler:4.9.0",
@@ -67,9 +69,10 @@ ext {
             "logging-interceptor"          : "com.squareup.okhttp3:logging-interceptor:3.9.1",
             "gson"                         : "com.google.code.gson:gson:2.8.5",
 
-            "doraemonkit"                  : "com.didichuxing.doraemonkit:doraemonkit:3.1.5",
-            "doraemonkit-no-op"            : "com.didichuxing.doraemonkit:doraemonkit-no-op:3.1.5",
-            "doraemonkit-leakcanary"       : "com.didichuxing.doraemonkit:doraemonkit-leakcanary:3.1.5",
+            "doraemonkit"                  : "com.didichuxing.doraemonkit:dokitx:3.3.5",
+            "doraemonkit-no-op"            : "com.didichuxing.doraemonkit:dokitx-no-op:3.3.5",
+
+            "leakcanary"                   : "com.squareup.leakcanary:leakcanary-android:2.6",
 
             "runner"                       : "androidx.test.ext:junit:1.0.0",
             "espresso-core"                : "androidx.test.espresso:espresso-core:3.2.0",

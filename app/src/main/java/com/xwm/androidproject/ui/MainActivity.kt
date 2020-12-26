@@ -23,7 +23,11 @@ class MainActivity : BaseActivity() {
         binding.lifecycleOwner = this
 
         binding.btnTest.setOnClickListener {
-            viewModel.getName()
+            test()
         }
+    }
+
+    private fun test() {
+        viewModel.getName()
     }
 }

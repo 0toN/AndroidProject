@@ -6,7 +6,6 @@ import com.xwm.base.BuildConfig
 /**
  * @author Created by Adam on 2018-12-20
  */
-
 object LogUtil {
 
     fun v(content: String) {
