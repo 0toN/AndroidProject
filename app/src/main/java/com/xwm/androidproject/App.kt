@@ -3,6 +3,9 @@ package com.xwm.androidproject
 import android.app.Application
 import android.content.ComponentCallbacks2
 import android.content.Context
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelStore
+import androidx.lifecycle.ViewModelStoreOwner
 import androidx.multidex.MultiDex
 import com.bumptech.glide.Glide
 import com.xwm.base.config.AppConfig
@@ -11,7 +14,15 @@ import com.xwm.base.util.LogUtil
 /**
  * @author Created by Adam on 2019-02-15
  */
-class App : Application() {
+class App : Application(), ViewModelStoreOwner {
+
+    private lateinit var mAppViewModelStore: ViewModelStore
+
+    private var mFactory: ViewModelProvider.Factory? = null
+
+    override fun getViewModelStore(): ViewModelStore {
+        return mAppViewModelStore
+    }
 
     override fun attachBaseContext(base: Context) {
         super.attachBaseContext(base)
@@ -20,7 +31,23 @@ class App : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        mAppViewModelStore = ViewModelStore()
         AppConfig.INSTANCE.initConfig(this)
+    }
+
+
+    /**
+     * 获取一个全局的ViewModel
+     */
+    fun getAppViewModelProvider(): ViewModelProvider {
+        return ViewModelProvider(this, this.getAppFactory())
+    }
+
+    private fun getAppFactory(): ViewModelProvider.Factory {
+        if (mFactory == null) {
+            mFactory = ViewModelProvider.AndroidViewModelFactory.getInstance(this)
+        }
+        return mFactory as ViewModelProvider.Factory
     }
 
     /**

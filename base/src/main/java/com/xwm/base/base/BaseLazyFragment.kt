@@ -1,9 +1,12 @@
 package com.xwm.base.base
 
+import androidx.databinding.ViewDataBinding
+
 /**
- * @author Created by Adam on 2019-02-20
+ * @author Created by xwm on 2019-02-20
  */
-abstract class BaseLazyFragment : BaseFragment() {
+abstract class BaseLazyFragment<VM : BaseViewModel<*>, DB : ViewDataBinding> :
+    BaseFragment<VM, DB>() {
 
     // Fragment 是否可见
     private var isFragmentVisible: Boolean = false

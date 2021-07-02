@@ -4,7 +4,7 @@ ext {
 
     android = [
             compileSdkVersion        : 30,
-            buildToolsVersion        : "30.0.2",
+            buildToolsVersion        : "30.0.3",
             minSdkVersion            : 21,
             targetSdkVersion         : 30,
             versionCode              : 1,
@@ -33,7 +33,7 @@ ext {
             "material"                     : "com.google.android.material:material:1.1.0",
             "recyclerview"                 : "androidx.recyclerview:recyclerview:1.1.0",
             "viewpager2"                   : "androidx.viewpager2:viewpager2:1.0.0",
-            "constraint-layout"            : 'androidx.constraintlayout:constraintlayout:1.1.3',
+            "constraint-layout"            : 'androidx.constraintlayout:constraintlayout:2.0.4',
             "multidex"                     : "androidx.multidex:multidex:2.0.1",
 
             "lifecycle-runtime"            : "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version",
@@ -69,8 +69,8 @@ ext {
             "logging-interceptor"          : "com.squareup.okhttp3:logging-interceptor:3.9.1",
             "gson"                         : "com.google.code.gson:gson:2.8.5",
 
-            "doraemonkit"                  : "com.didichuxing.doraemonkit:dokitx:3.3.5",
-            "doraemonkit-no-op"            : "com.didichuxing.doraemonkit:dokitx-no-op:3.3.5",
+            "doraemonkit"                  : "io.github.didi.dokit:dokitx:3.4.0-alpha04",
+            "doraemonkit-no-op"            : "io.github.didi.dokit:dokitx-no-op:3.4.0-alpha04",
 
             "leakcanary"                   : "com.squareup.leakcanary:leakcanary-android:2.6",
 

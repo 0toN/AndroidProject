@@ -1,12 +1,13 @@
-package com.xwm.androidproject.data.db
+package com.xwm.androidproject.data
 
 import com.google.gson.Gson
 import com.tencent.mmkv.MMKV
+import com.xwm.base.base.BaseDao
 
 /**
  * Created by xwm on 2020/6/29
  */
-class MainDao {
+class MainDao : BaseDao() {
 
     fun getCachedName(): String? {
         val kv = MMKV.defaultMMKV()

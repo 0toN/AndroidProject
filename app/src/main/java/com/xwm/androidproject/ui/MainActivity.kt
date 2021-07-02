@@ -1,33 +1,33 @@
 package com.xwm.androidproject.ui
 
-import android.os.Bundle
-import androidx.lifecycle.ViewModelProvider
+import com.xwm.androidproject.R
 import com.xwm.androidproject.databinding.ActivityMainBinding
-import com.xwm.androidproject.util.InjectorUtil
 import com.xwm.base.base.BaseActivity
 
 
-class MainActivity : BaseActivity() {
+class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
 
-    private val viewModel by lazy {
-        ViewModelProvider(this, InjectorUtil.getMainModelFactory()).get(MainViewModel::class.java)
+    override fun initVar() {
     }
 
-    private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(binding.root)
-
-        binding.viewModel = viewModel
-        binding.lifecycleOwner = this
-
-        binding.btnTest.setOnClickListener {
+    override fun initView() {
+        mDataBinding.btnTest.setOnClickListener {
             test()
         }
     }
 
+    override fun initDataObserver() {
+        mViewModel.nicknameData.observe(this, {
+            mDataBinding.btnTest.text = it
+        })
+    }
+
+
     private fun test() {
-        viewModel.getName()
+        mViewModel.getNickname()
+    }
+
+    override fun getLayoutId(): Int {
+        return R.layout.activity_main
     }
 }

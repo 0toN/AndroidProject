@@ -1,4 +1,4 @@
-package com.xwm.androidproject.data.bean
+package com.xwm.base.data.bean
 
 /**
  * Created by xwm on 2019-05-12

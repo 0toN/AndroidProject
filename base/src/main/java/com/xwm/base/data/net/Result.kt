@@ -1,4 +1,4 @@
-package com.xwm.androidproject.data.net
+package com.xwm.base.data.net
 
 /**
  * Created by xwm on 2020/5/22

@@ -7,17 +7,17 @@ import com.xwm.base.base.BaseViewModel
 /**
  * Created by xwm on 2020/6/28
  */
-class MainViewModel(private val repository: MainRepository) : BaseViewModel() {
+class MainViewModel : BaseViewModel<MainRepository>() {
 
-    var name = MutableLiveData<String>()
+    var nicknameData = MutableLiveData<String>()
 
     init {
-        name.value = "获取名字"
+        nicknameData.value = "获取名字"
     }
 
-    fun getName() {
+    fun getNickname() {
         launch({
-            name.value = repository.getName()
+            nicknameData.value = mRepository.getNickname()
         }, {})
     }
 }

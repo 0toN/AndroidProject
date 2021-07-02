@@ -5,6 +5,10 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.SystemClock
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
+import androidx.lifecycle.ViewModelProvider
+import com.xwm.base.ext.getClazz
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.cancel
@@ -14,13 +18,43 @@ import org.greenrobot.eventbus.EventBus
  * @author Created by Adam on 2018-10-26
  */
 @SuppressLint("Registered")
-open class BaseActivity : AppCompatActivity(), CoroutineScope by MainScope() {
+abstract class BaseActivity<VM : BaseViewModel<*>, DB : ViewDataBinding> : AppCompatActivity(),
+    CoroutineScope by MainScope() {
+
+    protected lateinit var mViewModel: VM
+    protected lateinit var mDataBinding: DB
 
     private var mStartActivityTag: String? = null
     private var mStartActivityTime: Long = 0
 
+    /**
+     * 初始化变量
+     */
+    protected abstract fun initVar()
+
+    /**
+     * 初始化控件
+     */
+    protected abstract fun initView()
+
+    /**
+     * 初始化LiveData数据观察者
+     */
+    protected abstract fun initDataObserver()
+
+    protected abstract fun getLayoutId(): Int
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        mDataBinding = DataBindingUtil.setContentView(this, getLayoutId())
+        mDataBinding.lifecycleOwner = this
+        mViewModel = ViewModelProvider(this).get(getClazz(this))
+
+        initVar()
+        initView()
+        initDataObserver()
+
         if (regEvent() && !EventBus.getDefault().isRegistered(this)) {
             EventBus.getDefault().register(this)
         }
@@ -80,7 +114,7 @@ open class BaseActivity : AppCompatActivity(), CoroutineScope by MainScope() {
     }
 
     override fun onDestroy() {
-        if (regEvent()) {
+        if (regEvent() && EventBus.getDefault().isRegistered(this)) {
             EventBus.getDefault().unregister(this)
         }
         //取消当前Activity的协程

@@ -1,13 +1,13 @@
-package com.xwm.androidproject.data.net
+package com.xwm.base.data.net
 
-import com.xwm.androidproject.constants.Constants
+import com.xwm.base.constants.Constants
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.coroutineScope
 
 /**
  * Created by xwm on 2019-05-12
  */
-class Network private constructor() {
+class Network {
 
     private val api by lazy {
         RetrofitFactory.instance.create(IRetrofitService::class.java)
@@ -15,7 +15,8 @@ class Network private constructor() {
 
     suspend fun getName() = execute { api.getName() }
 
-    private suspend fun <T> execute(block: suspend CoroutineScope.() -> BaseResponse<T>
+    private suspend fun <T> execute(
+        block: suspend CoroutineScope.() -> BaseResponse<T>
     ): Result<T> {
         return coroutineScope {
             val result: Result<T>
@@ -34,9 +35,9 @@ class Network private constructor() {
         private lateinit var instance: Network
 
         fun getInstance(): Network {
-            if (!::instance.isInitialized) {
+            if (!Companion::instance.isInitialized) {
                 synchronized(Network::class.java) {
-                    if (!::instance.isInitialized) {
+                    if (!Companion::instance.isInitialized) {
                         instance = Network()
                     }
                 }

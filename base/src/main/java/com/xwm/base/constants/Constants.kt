@@ -1,4 +1,4 @@
-package com.xwm.androidproject.constants
+package com.xwm.base.constants
 
 /**
  * Created by xwm on 2020/5/21

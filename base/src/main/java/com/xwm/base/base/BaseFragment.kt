@@ -4,7 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import com.xwm.base.ext.getClazz
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.cancel
@@ -13,28 +17,48 @@ import org.greenrobot.eventbus.EventBus
 /**
  * @author Created by Adam on 2019-02-15
  */
-abstract class BaseFragment : Fragment(), CoroutineScope by MainScope() {
-    // 根布局
-    protected var mRootView: View? = null
+abstract class BaseFragment<VM : BaseViewModel<*>, DB : ViewDataBinding> : Fragment(),
+    CoroutineScope by MainScope() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    protected lateinit var mViewModel: VM
+    protected lateinit var mDataBinding: DB
+
+    /**
+     * 初始化变量
+     */
+    protected abstract fun initVar()
+
+    /**
+     * 初始化控件
+     */
+    protected abstract fun initView()
+
+    /**
+     * 引入布局
+     */
+    protected abstract fun getLayoutId(): Int
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        mDataBinding = DataBindingUtil.inflate(inflater, getLayoutId(), container, false)
+        mDataBinding.lifecycleOwner = this
+        return mDataBinding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        mViewModel = ViewModelProvider(this).get(getClazz(this))
+
+        initVar()
+        initView()
+
         if (regEvent() && !EventBus.getDefault().isRegistered(this)) {
             EventBus.getDefault().register(this)
         }
-    }
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        if (mRootView == null && setLayoutId() > 0) {
-            mRootView = inflater.inflate(setLayoutId(), container, false)
-        }
-        return mRootView
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        initVar()
-        initView()
     }
 
     /**
@@ -56,7 +80,6 @@ abstract class BaseFragment : Fragment(), CoroutineScope by MainScope() {
         } catch (e: IllegalAccessException) {
             throw RuntimeException(e)
         }
-
     }
 
     override fun onDestroy() {
@@ -66,13 +89,4 @@ abstract class BaseFragment : Fragment(), CoroutineScope by MainScope() {
         cancel()
         super.onDestroy()
     }
-
-    //初始化变量
-    protected abstract fun initVar()
-
-    //初始化控件
-    protected abstract fun initView()
-
-    //引入布局
-    protected abstract fun setLayoutId(): Int
 }

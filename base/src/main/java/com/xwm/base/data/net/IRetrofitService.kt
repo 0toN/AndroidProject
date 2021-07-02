@@ -1,6 +1,6 @@
-package com.xwm.androidproject.data.net
+package com.xwm.base.data.net
 
-import com.xwm.androidproject.data.bean.NameBean
+import com.xwm.base.data.bean.NameBean
 import retrofit2.http.GET
 
 /**
