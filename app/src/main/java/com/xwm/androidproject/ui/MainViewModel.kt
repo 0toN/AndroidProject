@@ -18,6 +18,6 @@ class MainViewModel : BaseViewModel<MainRepository>() {
     fun getNickname() {
         launch({
             nicknameData.value = mRepository.getNickname()
-        }, {})
+        })
     }
 }

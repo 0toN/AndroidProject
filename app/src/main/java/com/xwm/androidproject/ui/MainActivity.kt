@@ -7,9 +7,6 @@ import com.xwm.base.base.BaseActivity
 
 class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
 
-    override fun initVar() {
-    }
-
     override fun initView() {
         mDataBinding.btnTest.setOnClickListener {
             test()
@@ -22,6 +19,9 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
         })
     }
 
+    override fun loadData() {
+
+    }
 
     private fun test() {
         mViewModel.getNickname()
@@ -30,4 +30,5 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
     override fun getLayoutId(): Int {
         return R.layout.activity_main
     }
+
 }

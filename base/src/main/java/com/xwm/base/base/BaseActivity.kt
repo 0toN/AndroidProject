@@ -30,12 +30,17 @@ abstract class BaseActivity<VM : BaseViewModel<*>, DB : ViewDataBinding> : AppCo
     /**
      * 初始化变量
      */
-    protected abstract fun initVar()
+    protected open fun initVar() {}
 
     /**
      * 初始化控件
      */
     protected abstract fun initView()
+
+    /**
+     * 加载数据
+     */
+    protected open fun loadData() {}
 
     /**
      * 初始化LiveData数据观察者
@@ -54,6 +59,7 @@ abstract class BaseActivity<VM : BaseViewModel<*>, DB : ViewDataBinding> : AppCo
         initVar()
         initView()
         initDataObserver()
+        loadData()
 
         if (regEvent() && !EventBus.getDefault().isRegistered(this)) {
             EventBus.getDefault().register(this)

@@ -13,9 +13,10 @@ import java.io.File
 import java.util.concurrent.TimeUnit
 
 
-/**
- * @author Created by Adam
- */
+val api by lazy {
+    RetrofitFactory.instance.create(API.BASE_URL, ApiService::class.java)
+}
+
 class RetrofitFactory private constructor() {
     private lateinit var retrofit: Retrofit
     private var builder: Retrofit.Builder
@@ -62,14 +63,16 @@ class RetrofitFactory private constructor() {
         override fun intercept(chain: Interceptor.Chain): Response {
             val response: Response
             val request: Request
-            if (NetworkUtil.isConnected) {
+            if (NetworkUtil.isConnected()) {
                 //有网络，检查10秒内的缓存
                 request = chain.request()
-                        .newBuilder()
-                        .cacheControl(CacheControl.Builder()
-                                .maxAge(10, TimeUnit.SECONDS)
-                                .build())
-                        .build()
+                    .newBuilder()
+                    .cacheControl(
+                        CacheControl.Builder()
+                            .maxAge(10, TimeUnit.SECONDS)
+                            .build()
+                    )
+                    .build()
             } else {
                 //无网络，检查30天内的缓存，即使是过期的缓存
                 request = chain.request()

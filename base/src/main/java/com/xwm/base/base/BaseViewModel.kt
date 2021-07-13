@@ -17,13 +17,19 @@ open class BaseViewModel<R : BaseRepository<*>> : ViewModel() {
             .newInstance()
     }
 
-    fun launch(block: suspend () -> Unit, error: suspend (Throwable) -> Unit) =
+    fun launch(
+        block: suspend () -> Unit,
+        success: suspend () -> Unit = {},
+        error: suspend (Throwable) -> Unit = {}
+    ) =
         viewModelScope.launch {
-            try {
+            kotlin.runCatching {
                 block()
-            } catch (e: Throwable) {
-                LogUtil.e(e)
-                error(e)
+            }.onSuccess {
+                success()
+            }.onFailure {
+                LogUtil.e(it)
+                error(it)
             }
         }
 }

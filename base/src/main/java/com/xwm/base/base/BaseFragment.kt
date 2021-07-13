@@ -26,12 +26,17 @@ abstract class BaseFragment<VM : BaseViewModel<*>, DB : ViewDataBinding> : Fragm
     /**
      * 初始化变量
      */
-    protected abstract fun initVar()
+    protected open fun initVar() {}
 
     /**
      * 初始化控件
      */
     protected abstract fun initView()
+
+    /**
+     * 加载数据
+     */
+    protected open fun loadData() {}
 
     /**
      * 引入布局
@@ -55,6 +60,7 @@ abstract class BaseFragment<VM : BaseViewModel<*>, DB : ViewDataBinding> : Fragm
 
         initVar()
         initView()
+        loadData()
 
         if (regEvent() && !EventBus.getDefault().isRegistered(this)) {
             EventBus.getDefault().register(this)
