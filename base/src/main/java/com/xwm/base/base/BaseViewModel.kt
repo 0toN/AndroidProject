@@ -4,7 +4,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.xwm.base.ext.getClazz
 import com.xwm.base.util.LogUtil
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 /**
  * Created by xwm on 2020/7/6
@@ -17,19 +19,21 @@ open class BaseViewModel<R : BaseRepository<*>> : ViewModel() {
             .newInstance()
     }
 
-    fun launch(
-        block: suspend () -> Unit,
-        success: suspend () -> Unit = {},
-        error: suspend (Throwable) -> Unit = {}
+    fun <T> launch(
+        block: suspend () -> T,
+        onSuccess: suspend (T) -> Unit = {},
+        onError: suspend (Throwable) -> Unit = {}
     ) =
         viewModelScope.launch {
             kotlin.runCatching {
-                block()
+                withContext((Dispatchers.IO)) {
+                    block()
+                }
             }.onSuccess {
-                success()
+                onSuccess(it)
             }.onFailure {
                 LogUtil.e(it)
-                error(it)
+                onError(it)
             }
         }
 }

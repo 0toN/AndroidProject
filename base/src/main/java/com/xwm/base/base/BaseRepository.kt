@@ -1,6 +1,5 @@
 package com.xwm.base.base
 
-import com.xwm.base.data.net.Network
 import com.xwm.base.ext.getClazz
 
 /**
@@ -12,9 +11,5 @@ open class BaseRepository<D : BaseDao> {
         (getClazz<D>(this))
             .getDeclaredConstructor()
             .newInstance()
-    }
-
-    protected val mNetwork by lazy {
-        Network()
     }
 }

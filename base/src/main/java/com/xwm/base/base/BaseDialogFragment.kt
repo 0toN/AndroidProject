@@ -7,9 +7,7 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.os.SystemClock
-import android.view.Gravity
-import android.view.ViewGroup
-import android.view.Window
+import android.view.*
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatDialogFragment
 import androidx.fragment.app.FragmentManager
@@ -21,7 +19,7 @@ import org.greenrobot.eventbus.EventBus
 /**
  * @author Created by Adam on 2018-08-21
  */
-open class BaseDialogFragment : AppCompatDialogFragment() {
+abstract class BaseDialogFragment : AppCompatDialogFragment() {
 
     private var mOnDismissListener: DialogInterface.OnDismissListener? = null
 
@@ -32,6 +30,14 @@ open class BaseDialogFragment : AppCompatDialogFragment() {
         }
     }
 
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return inflater.inflate(getLayoutId(), container, false)
+    }
+
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val dialog = super.onCreateDialog(savedInstanceState)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -39,14 +45,14 @@ open class BaseDialogFragment : AppCompatDialogFragment() {
         return dialog
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        dialog?.window?.let {
-            it.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-            it.setWindowAnimations(getWindowAnimations())
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        dialog?.window?.apply {
+            setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            setWindowAnimations(getWindowAnimations())
             // 宽度全屏
-            it.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
-            it.attributes.gravity = getGravity()
+            setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+            attributes.gravity = getGravity()
         }
     }
 
@@ -54,7 +60,8 @@ open class BaseDialogFragment : AppCompatDialogFragment() {
         super.onResume()
         if (showKeyboard()) {
             view?.postDelayed({
-                val inManager = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                val inManager =
+                    requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                 inManager.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS)
             }, 500)
         }
@@ -66,6 +73,8 @@ open class BaseDialogFragment : AppCompatDialogFragment() {
         }
         super.onDestroy()
     }
+
+    protected abstract fun getLayoutId(): Int
 
     /**
      * 根据 tag 判断Dialog是否重复显示
@@ -91,8 +100,8 @@ open class BaseDialogFragment : AppCompatDialogFragment() {
         } catch (exception: IllegalStateException) {
             LogUtil.e(exception)
             manager.beginTransaction()
-                    .add(this, tag)
-                    .commitAllowingStateLoss()
+                .add(this, tag)
+                .commitAllowingStateLoss()
         }
 
     }

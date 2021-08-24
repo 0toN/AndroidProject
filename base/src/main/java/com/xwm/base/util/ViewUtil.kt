@@ -2,6 +2,7 @@ package com.xwm.base.util
 
 import android.util.Log
 import android.view.View
+import android.view.ViewGroup
 
 /**
  * View相关通用逻辑类
@@ -45,6 +46,15 @@ object ViewUtil {
      */
     fun shieldTouchEvent(view: View) {
         view.setOnTouchListener(onTouchListener)
+    }
+
+    fun removeFromParent(view: View?) {
+        view?.let {
+            val parent = view.parent
+            if (parent is ViewGroup) {
+                parent.removeView(view)
+            }
+        }
     }
 
     /**

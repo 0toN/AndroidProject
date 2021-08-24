@@ -1,10 +1,12 @@
 package com.xwm.base.config
 
+import android.annotation.SuppressLint
 import android.app.ActivityManager
 import android.app.Application
 import android.content.Context
-import com.didichuxing.doraemonkit.DoraemonKit
+import com.didichuxing.doraemonkit.DoKit
 import com.tencent.mmkv.MMKV
+import com.xwm.base.util.CrashUtil
 import com.xwm.base.util.Utils
 
 
@@ -19,12 +21,14 @@ class AppConfig {
         }
     }
 
+    @SuppressLint("MissingPermission")
     fun initConfig(app: Application) {
         Utils.init(app)
-        if (shouldInit(app)) {
-            DoraemonKit.install(app, "a8be61c3898d0a9ac0f4eee66680f58c")
-        }
         MMKV.initialize(app)
+        CrashUtil.init()
+        if (shouldInit(app)) {
+            DoKit.Builder(app).build()
+        }
     }
 
     private fun shouldInit(app: Application): Boolean {

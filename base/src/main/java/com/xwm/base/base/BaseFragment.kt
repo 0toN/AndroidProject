@@ -70,22 +70,8 @@ abstract class BaseFragment<VM : BaseViewModel<*>, DB : ViewDataBinding> : Fragm
     /**
      * 需要注册EventBus，则重写该方法 并返回 true
      */
-    protected fun regEvent(): Boolean {
+    open fun regEvent(): Boolean {
         return false
-    }
-
-    override fun onDetach() {
-        super.onDetach()
-        // 解决java.lang.IllegalStateException: Activity has been destroyed 的错误
-        try {
-            val childFragmentManager = Fragment::class.java.getDeclaredField("mChildFragmentManager")
-            childFragmentManager.isAccessible = true
-            childFragmentManager.set(this, null)
-        } catch (e: NoSuchFieldException) {
-            throw RuntimeException(e)
-        } catch (e: IllegalAccessException) {
-            throw RuntimeException(e)
-        }
     }
 
     override fun onDestroy() {

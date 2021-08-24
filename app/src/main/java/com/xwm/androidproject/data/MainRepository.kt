@@ -2,6 +2,8 @@ package com.xwm.androidproject.data
 
 import com.xwm.base.base.BaseRepository
 import com.xwm.base.data.net.Result
+import com.xwm.base.data.net.api
+import com.xwm.base.data.net.execute
 import com.xwm.base.util.ToastUtil
 
 /**
@@ -12,7 +14,7 @@ class MainRepository : BaseRepository<MainDao>() {
     suspend fun getNickname(): String? {
         var name = mDao.getCachedName()
         if (name == null) {
-            val result = mNetwork.getName()
+            val result = execute { api.getName() }
             when (result) {
                 is Result.Success -> {
                     name = result.data.name

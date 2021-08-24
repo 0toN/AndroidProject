@@ -17,7 +17,9 @@ class MainViewModel : BaseViewModel<MainRepository>() {
 
     fun getNickname() {
         launch({
-            nicknameData.value = mRepository.getNickname()
+            mRepository.getNickname()
+        }, {
+            nicknameData.value = it
         })
     }
 }

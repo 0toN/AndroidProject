@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'com.didi.dokit'
+apply plugin: 'kotlin-parcelize'
 
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
@@ -13,9 +14,13 @@ android {
     }
 
 //    composeOptions {
-//        kotlinCompilerVersion "1.5.20"
-//        kotlinCompilerExtensionVersion "1.0.0-beta09"
+//        kotlinCompilerVersion "1.5.10"
+//        kotlinCompilerExtensionVersion "1.0.0"
 //    }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
 
     defaultConfig {
         applicationId rootProject.ext.android.applicationId
@@ -45,10 +50,10 @@ android {
 
     buildTypes {
         debug {
-            minifyEnabled false
-            zipAlignEnabled false
-            shrinkResources false
 //            signingConfig signingConfigs.debug
+            ndk {
+                abiFilters "armeabi-v7a", "x86"
+            }
         }
 
         release {
@@ -57,6 +62,9 @@ android {
             shrinkResources true
 //            signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            ndk {
+                abiFilters "armeabi-v7a"
+            }
         }
     }
 
@@ -67,6 +75,8 @@ android {
 }
 
 dependencies {
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation fileTree(include: ['aar','*.jar'], dir: 'libs')
     implementation project(":base")
+
+    kapt rootProject.ext.dependencies["glide-compiler"]
 }

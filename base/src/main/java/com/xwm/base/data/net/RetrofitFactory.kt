@@ -1,6 +1,7 @@
 package com.xwm.base.data.net
 
 import android.text.TextUtils
+import com.xwm.base.constants.Constants
 import com.xwm.base.util.LogUtil
 import com.xwm.base.util.NetworkUtil
 import com.xwm.base.util.Utils
@@ -15,6 +16,22 @@ import java.util.concurrent.TimeUnit
 
 val api by lazy {
     RetrofitFactory.instance.create(API.BASE_URL, ApiService::class.java)
+}
+
+suspend fun <T> execute(block: suspend () -> BaseResponse<T>): Result<T>? {
+    var result: Result<T>? = null
+    runCatching {
+        block()
+    }.onSuccess { response ->
+        result = if (response.code == Constants.HTTP_CODE_REQUEST_SUCCESS) {
+            Result.Success(response.data)
+        } else {
+            Result.Failure(response.msg)
+        }
+    }.onFailure {
+        result = Result.Error(it)
+    }
+    return result
 }
 
 class RetrofitFactory private constructor() {

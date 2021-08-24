@@ -1,6 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-parcelize'
 
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
@@ -70,6 +71,8 @@ dependencies {
     releaseImplementation rootProject.ext.dependencies["doraemonkit-no-op"]
 
     debugImplementation rootProject.ext.dependencies["leakcanary"]
+
+    api rootProject.ext.dependencies["parcelize-runtime"]
 
     api rootProject.ext.dependencies["junit"]
     api rootProject.ext.dependencies["runner"]
