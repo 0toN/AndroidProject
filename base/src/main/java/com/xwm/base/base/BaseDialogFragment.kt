@@ -25,7 +25,10 @@ abstract class BaseDialogFragment : AppCompatDialogFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if (regEvent() && !EventBus.getDefault().isRegistered(this)) {
+        if (regEvent() &&
+            !EventBus.getDefault().isRegistered(this) &&
+            EventBus.getDefault().hasSubscriberForEvent(javaClass)
+        ) {
             EventBus.getDefault().register(this)
         }
     }
@@ -68,7 +71,7 @@ abstract class BaseDialogFragment : AppCompatDialogFragment() {
     }
 
     override fun onDestroy() {
-        if (regEvent()) {
+        if (EventBus.getDefault().isRegistered(this)) {
             EventBus.getDefault().unregister(this)
         }
         super.onDestroy()

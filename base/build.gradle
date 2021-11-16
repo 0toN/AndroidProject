@@ -47,6 +47,11 @@ dependencies {
     api rootProject.ext.dependencies["room-runtime"]
     api rootProject.ext.dependencies["room-ktx"]
     kapt rootProject.ext.dependencies["room-compiler"]
+    api rootProject.ext.dependencies["databinding-runtime"]
+    api rootProject.ext.dependencies["compose-ui"]
+    api rootProject.ext.dependencies["compose-material"]
+    api rootProject.ext.dependencies["compose-ui-tooling-preview"]
+    api rootProject.ext.dependencies["activity-compose"]
 
 //    api rootProject.ext.dependencies["gloading"]
 
@@ -67,8 +72,8 @@ dependencies {
     api rootProject.ext.dependencies["permissionx"]
     api rootProject.ext.dependencies["immersionbar"]
 
-    debugImplementation rootProject.ext.dependencies["doraemonkit"]
-    releaseImplementation rootProject.ext.dependencies["doraemonkit-no-op"]
+//    debugImplementation rootProject.ext.dependencies["doraemonkit"]
+//    releaseImplementation rootProject.ext.dependencies["doraemonkit-no-op"]
 
     debugImplementation rootProject.ext.dependencies["leakcanary"]
 
@@ -77,4 +82,7 @@ dependencies {
     api rootProject.ext.dependencies["junit"]
     api rootProject.ext.dependencies["runner"]
     api rootProject.ext.dependencies["espresso-core"]
+
+    androidTestApi "androidx.compose.ui:ui-test-junit4:1.0.2"
+    debugApi "androidx.compose.ui:ui-tooling:1.0.2"
 }

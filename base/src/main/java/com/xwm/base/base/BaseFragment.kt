@@ -62,7 +62,10 @@ abstract class BaseFragment<VM : BaseViewModel<*>, DB : ViewDataBinding> : Fragm
         initView()
         loadData()
 
-        if (regEvent() && !EventBus.getDefault().isRegistered(this)) {
+        if (regEvent() &&
+            !EventBus.getDefault().isRegistered(this) &&
+            EventBus.getDefault().hasSubscriberForEvent(javaClass)
+        ) {
             EventBus.getDefault().register(this)
         }
     }
@@ -75,7 +78,7 @@ abstract class BaseFragment<VM : BaseViewModel<*>, DB : ViewDataBinding> : Fragm
     }
 
     override fun onDestroy() {
-        if (regEvent()) {
+        if (EventBus.getDefault().isRegistered(this)) {
             EventBus.getDefault().unregister(this)
         }
         cancel()

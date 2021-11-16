@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.app.ActivityManager
 import android.app.Application
 import android.content.Context
-import com.didichuxing.doraemonkit.DoKit
 import com.tencent.mmkv.MMKV
 import com.xwm.base.util.CrashUtil
 import com.xwm.base.util.Utils
@@ -27,7 +26,7 @@ class AppConfig {
         MMKV.initialize(app)
         CrashUtil.init()
         if (shouldInit(app)) {
-            DoKit.Builder(app).build()
+//            DoKit.Builder(app).build()
         }
     }
 

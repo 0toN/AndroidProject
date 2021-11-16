@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
-apply plugin: 'com.didi.dokit'
+//apply plugin: 'com.didi.dokit'
 apply plugin: 'kotlin-parcelize'
 
 android {
@@ -10,13 +10,13 @@ android {
 
     buildFeatures {
         dataBinding true
-//        compose true
+        compose true
     }
 
-//    composeOptions {
-//        kotlinCompilerVersion "1.5.10"
-//        kotlinCompilerExtensionVersion "1.0.0"
-//    }
+    composeOptions {
+        kotlinCompilerVersion '1.5.21'
+        kotlinCompilerExtensionVersion "1.0.2"
+    }
 
     kotlinOptions {
         jvmTarget = "1.8"
@@ -32,21 +32,21 @@ android {
         multiDexEnabled true
     }
 
-    /*
+
  signingConfigs {
-     release {
-         keyAlias RELEASE_KEY_ALIAS
-         keyPassword RELEASE_KEY_PASSWORD
-         storeFile file(RELEASE_STORE_FILE)
-         storePassword RELEASE_STORE_PASSWORD
-     }
-     debug {
-         keyAlias RELEASE_KEY_ALIAS
-         keyPassword RELEASE_KEY_PASSWORD
-         storeFile file(RELEASE_STORE_FILE)
-         storePassword RELEASE_STORE_PASSWORD
-     }
- }*/
+//     release {
+//         keyAlias RELEASE_KEY_ALIAS
+//         keyPassword RELEASE_KEY_PASSWORD
+//         storeFile file(RELEASE_STORE_FILE)
+//         storePassword RELEASE_STORE_PASSWORD
+//     }
+//     debug {
+//         keyAlias RELEASE_KEY_ALIAS
+//         keyPassword RELEASE_KEY_PASSWORD
+//         storeFile file(RELEASE_STORE_FILE)
+//         storePassword RELEASE_STORE_PASSWORD
+//     }
+ }
 
     buildTypes {
         debug {
@@ -75,7 +75,7 @@ android {
 }
 
 dependencies {
-    implementation fileTree(include: ['aar','*.jar'], dir: 'libs')
+    implementation fileTree(include: ['*.aar', '*.jar'], dir: 'libs')
     implementation project(":base")
 
     kapt rootProject.ext.dependencies["glide-compiler"]

@@ -61,7 +61,10 @@ abstract class BaseActivity<VM : BaseViewModel<*>, DB : ViewDataBinding> : AppCo
         initDataObserver()
         loadData()
 
-        if (regEvent() && !EventBus.getDefault().isRegistered(this)) {
+        if (regEvent() &&
+            !EventBus.getDefault().isRegistered(this) &&
+            EventBus.getDefault().hasSubscriberForEvent(javaClass)
+        ) {
             EventBus.getDefault().register(this)
         }
     }
@@ -120,7 +123,7 @@ abstract class BaseActivity<VM : BaseViewModel<*>, DB : ViewDataBinding> : AppCo
     }
 
     override fun onDestroy() {
-        if (regEvent() && EventBus.getDefault().isRegistered(this)) {
+        if (EventBus.getDefault().isRegistered(this)) {
             EventBus.getDefault().unregister(this)
         }
         //取消当前Activity的协程

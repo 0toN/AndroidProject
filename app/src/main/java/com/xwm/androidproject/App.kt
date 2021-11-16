@@ -35,7 +35,6 @@ class App : Application(), ViewModelStoreOwner {
         AppConfig.INSTANCE.initConfig(this)
     }
 
-
     /**
      * 获取一个全局的ViewModel
      */
@@ -49,15 +48,6 @@ class App : Application(), ViewModelStoreOwner {
         }
         return mFactory as ViewModelProvider.Factory
     }
-
-    /**
-     * 程序终止的时候执行
-     */
-    override fun onTerminate() {
-        super.onTerminate()
-        LogUtil.d("onTerminate")
-    }
-
 
     /**
      * 低内存的时候执行
