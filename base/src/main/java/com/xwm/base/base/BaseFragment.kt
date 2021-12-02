@@ -62,10 +62,7 @@ abstract class BaseFragment<VM : BaseViewModel<*>, DB : ViewDataBinding> : Fragm
         initView()
         loadData()
 
-        if (regEvent() &&
-            !EventBus.getDefault().isRegistered(this) &&
-            EventBus.getDefault().hasSubscriberForEvent(javaClass)
-        ) {
+        if (regEvent() && !EventBus.getDefault().isRegistered(this)) {
             EventBus.getDefault().register(this)
         }
     }

@@ -61,10 +61,7 @@ abstract class BaseActivity<VM : BaseViewModel<*>, DB : ViewDataBinding> : AppCo
         initDataObserver()
         loadData()
 
-        if (regEvent() &&
-            !EventBus.getDefault().isRegistered(this) &&
-            EventBus.getDefault().hasSubscriberForEvent(javaClass)
-        ) {
+        if (regEvent() && !EventBus.getDefault().isRegistered(this)) {
             EventBus.getDefault().register(this)
         }
     }
